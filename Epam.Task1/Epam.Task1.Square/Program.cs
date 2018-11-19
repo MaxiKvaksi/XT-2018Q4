@@ -10,8 +10,17 @@ namespace Epam.Task1.Square
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Application which demonstrate work of function showing donut. \nFor example:7x7");
-            ShowSquare(7);
+            Console.WriteLine("Application which demonstrate work of function showing donut(square).");
+            Console.WriteLine("\nInput donut(square) size:");
+            if (int.TryParse(Console.ReadLine(), out int n))
+            {
+                Console.WriteLine($"Your donut({n}x{n}):");
+                ShowSquare(n);
+            }
+            else
+            {
+                Console.WriteLine("Uncorrect input!");
+            }
         }
 
         public static void ShowSquare(int size)
@@ -20,19 +29,30 @@ namespace Epam.Task1.Square
 
             for (int i = 0; i < halfSize; i++)
             {
-                Console.WriteLine(GetStars(size));
+                ShowStars(size);
+                Console.WriteLine();
             }
-            string temp = size % 2 != 0 ? " " : "  ";
-            Console.WriteLine(GetStars(halfSize) + temp + GetStars(halfSize));
+
+            ShowStars(halfSize);
+            Console.Write(size % 2 != 0 
+                ? " " 
+                : "  ");
+            ShowStars(halfSize);
+            Console.WriteLine();
             for (int i = 0; i < halfSize; i++)
             {
-                Console.WriteLine(GetStars(size));
+                ShowStars(size);
+                Console.WriteLine();
             }
+
         }
 
-        public static string GetStars(int n)
+        public static void ShowStars(int n)
         {
-            return new string('*', n);
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write('*');
+            }
         }
     }
 }

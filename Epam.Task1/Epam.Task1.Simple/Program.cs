@@ -11,11 +11,20 @@ namespace Epam.Task1.Simple
         public static void Main(string[] args)
         {
             Console.WriteLine("Application which demonstrate work of function of determining simplicity of number." +
-               "\n\nFor example: 2, 4, 7, 13");
-            Console.WriteLine("2 is simple: " + IsSimple(2));
+               "\n\nFor example:  4, 7");
             Console.WriteLine("4 is simple: " + IsSimple(4));
             Console.WriteLine("7 is simple: " + IsSimple(7));
-            Console.WriteLine("13 is simple: " + IsSimple(13));
+
+            Console.WriteLine("\nInput the number for checking:");
+            if (int.TryParse(Console.ReadLine(), out int n))
+            {
+                Console.WriteLine($"Your number({n}) is simple: " + IsSimple(n));
+            }
+            else
+            {
+                Console.WriteLine("Uncorrect input!");
+            }
+
         }
 
         public static bool IsSimple(long n)
