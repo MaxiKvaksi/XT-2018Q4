@@ -1,7 +1,4 @@
-﻿/**
- * The application show sum of non negative numbers in array.
- */
-using System;
+﻿using System;
 
 namespace Epam.Task2.Non_NegativeSum
 {
@@ -43,8 +40,8 @@ namespace Epam.Task2.Non_NegativeSum
                 if (array[i] <= 0)
                 {
                     break;
-
                 }
+
                 sum += array[i];
             }
 

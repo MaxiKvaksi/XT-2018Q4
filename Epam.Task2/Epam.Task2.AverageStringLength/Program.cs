@@ -1,7 +1,4 @@
-﻿/*
- * The application define average words length in sentence.
- * */
-using System;
+﻿using System;
 
 namespace Epam.Task2.AverageStringLength
 {

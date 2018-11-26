@@ -1,7 +1,4 @@
-﻿/**
- * The application calculates the area of the rectangle.
- */
-using System;
+﻿using System;
 
 namespace Epam.Task2.Rectangle
 {
@@ -10,7 +7,7 @@ namespace Epam.Task2.Rectangle
         public static void Main(string[] args)
         {
             Console.WriteLine("The application calculates the area of the rectangle." + Environment.NewLine + "Input a side \"a\":");
-            if(double.TryParse(Console.ReadLine(), out double a) && a > 0)
+            if (double.TryParse(Console.ReadLine(), out double a) && a > 0)
             {
                 Console.WriteLine("Input a side \"b\":");
                 if (double.TryParse(Console.ReadLine(), out double b) && b > 0)

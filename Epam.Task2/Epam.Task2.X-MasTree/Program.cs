@@ -1,7 +1,4 @@
-﻿/**
- * The application draw x-mas tree.
- */
-using System;
+﻿using System;
 
 namespace Epam.Task2.X_MasTree
 {

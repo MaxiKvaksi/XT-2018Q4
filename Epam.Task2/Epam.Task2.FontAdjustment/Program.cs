@@ -1,7 +1,4 @@
-﻿/**
- * The application is for changing text style.
- */
-using System;
+﻿using System;
 
 namespace Epam.Task2.FontAdjustment
 {
@@ -16,7 +13,7 @@ namespace Epam.Task2.FontAdjustment
             Underline = 4
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             TextStyle currentStyle = TextStyle.None;
             while (true)
@@ -32,6 +29,7 @@ namespace Epam.Task2.FontAdjustment
                     {
                         n = 4;
                     }
+
                     currentStyle ^= (TextStyle)n;
                     Console.WriteLine(currentStyle);
                 }
@@ -39,8 +37,8 @@ namespace Epam.Task2.FontAdjustment
                 {
                     Console.WriteLine("Incorrect input or exit. Application will be stop.");
                     break;
-
                 }
+
                 Console.Clear();
             }
         }

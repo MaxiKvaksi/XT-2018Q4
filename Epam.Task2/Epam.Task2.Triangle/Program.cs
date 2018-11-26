@@ -1,7 +1,4 @@
-﻿/**
- *   The application draw triangle.
- */
-using System;
+﻿using System;
 
 namespace Epam.Task2.Triangle
 {

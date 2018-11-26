@@ -1,7 +1,4 @@
-﻿/**
- * The application generate array and sort its, also the application show the max and min elements of array.
- * */
-using System;
+﻿using System;
 
 namespace Epam.Task2.ArrayProcessing
 {
@@ -17,8 +14,8 @@ namespace Epam.Task2.ArrayProcessing
                 GenerateArray(ref numbers);
                 Console.WriteLine(Environment.NewLine + "Generated array:");
                 ShowArray(numbers);
-                Console.WriteLine(Environment.NewLine + $"Min of array: {GetArrayMinValue(numbers)}");//also we can use the 0 item in sorted array by ASC
-                Console.WriteLine(Environment.NewLine + $"Max of array: {GetArrayMaxValue(numbers)}");//also we can use the last item in sorted array by ASC
+                Console.WriteLine(Environment.NewLine + $"Min of array: {GetArrayMinValue(numbers)}"); 
+                Console.WriteLine(Environment.NewLine + $"Max of array: {GetArrayMaxValue(numbers)}"); 
                 SortArray(ref numbers);
                 Console.WriteLine(Environment.NewLine + "Sorted array:");
                 ShowArray(numbers);
@@ -44,7 +41,7 @@ namespace Epam.Task2.ArrayProcessing
             {
                 for (int j = i; j < array.Length; j++)
                 {
-                    if(array[i] > array[j])
+                    if (array[i] > array[j])
                     {
                         int temp = array[i];
                         array[i] = array[j];
@@ -69,7 +66,10 @@ namespace Epam.Task2.ArrayProcessing
             int max = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] > max) max = array[i];
+                if (array[i] > max)
+                {
+                    max = array[i];
+                }
             }
 
             return max;
@@ -80,7 +80,10 @@ namespace Epam.Task2.ArrayProcessing
             int min = array[0];
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i] < min) min = array[i];
+                if (array[i] < min)
+                {
+                    min = array[i];
+                }
             }
 
             return min;

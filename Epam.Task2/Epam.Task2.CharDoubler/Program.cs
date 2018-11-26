@@ -1,9 +1,5 @@
-﻿/**
- * The application duplicates symbols in first string from second string.
- * */
-using System;
+﻿using System;
 using System.Text;
-
 
 namespace Epam.Task2.CharDoubler
 {
@@ -26,12 +22,13 @@ namespace Epam.Task2.CharDoubler
             StringBuilder sbstr1 = new StringBuilder(firstString);
             StringBuilder sbstr2 = new StringBuilder(secondString);
             string currentSymbol;
-            while(sbstr2.Length > 0)
+            while (sbstr2.Length > 0)
             {
                 currentSymbol = sbstr2[0].ToString();
                 sbstr1.Replace(currentSymbol, currentSymbol + currentSymbol);
                 sbstr2.Replace(currentSymbol, string.Empty);
             }
+
             return sbstr1.ToString();
         }
     }

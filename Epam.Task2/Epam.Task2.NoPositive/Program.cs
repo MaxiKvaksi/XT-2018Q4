@@ -1,7 +1,4 @@
-﻿/**
- * The application which change positive numbers to zeros in 3D array.
- * */
-using System;
+﻿using System;
 
 namespace Epam.Task2.NoPositive
 {
@@ -21,8 +18,8 @@ namespace Epam.Task2.NoPositive
         public static int[,,] Get3DArray(out int[,,] array3d)
         {
             Random random = new Random();
-            const int size = 2;
-            array3d = new int[size, size, size];
+            const int Size = 2;
+            array3d = new int[Size, Size, Size];
             for (int i = 0; i < array3d.GetLength(0); i++)
             {
                 for (int j = 0; j < array3d.GetLength(1); j++)
@@ -33,8 +30,8 @@ namespace Epam.Task2.NoPositive
                     }
                 }
             }
-            return array3d;
 
+            return array3d;
         }
 
         public static void PositiveIt(ref int[,,] array3d)
@@ -45,7 +42,10 @@ namespace Epam.Task2.NoPositive
                 {
                     for (int k = 0; k < array3d.GetLength(2); k++)
                     {
-                        if (array3d[i, j, k] > 0) array3d[i,j,k] = 0;
+                        if (array3d[i, j, k] > 0)
+                        {
+                            array3d[i, j, k] = 0;
+                        }
                     }
                 }
             }
@@ -62,8 +62,10 @@ namespace Epam.Task2.NoPositive
                     {
                         Console.Write(array3d[i, j, k] + " ");
                     }
+
                     Console.WriteLine();
                 }
+
                 Console.WriteLine();
             }
         }
