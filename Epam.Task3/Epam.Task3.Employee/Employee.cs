@@ -23,7 +23,7 @@ namespace Epam.Task3.Employee
 
             set
             {
-                if (value >= 0)
+                if (value >= 0 && value <= this.Age)
                 {
                     this.workExperience = value;
                 }
@@ -36,12 +36,7 @@ namespace Epam.Task3.Employee
 
         public override string ToString()
         {
-            return $"Employee:{Environment.NewLine}" +
-                $"Second name: {this.SecondName}{Environment.NewLine}" +
-                $"Name: {this.Name} {Environment.NewLine}" +
-                $"Patronymic: {this.Partonymic}{Environment.NewLine}" +
-                $"Date of birth: {this.DateOfBirth.ToString("yyyy.MM.dd")}{Environment.NewLine}" +
-                $"Age: {this.Age}{Environment.NewLine}" +
+            return base.ToString() +
                 $"Position: {this.Position}{Environment.NewLine}" +
                 $"Work experience: {this.workExperience} years.";
         }

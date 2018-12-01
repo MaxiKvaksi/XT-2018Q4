@@ -1,19 +1,12 @@
 ﻿namespace Epam.Task3.VectorGraphicsEditor
 {
-    public class Color
+    public enum Color
     {
-        private string color;
-
-        public Color(string color)
-        {
-            this.Color_ = color;
-        }
-
-        public string Color_ { get => this.color; set => this.color = value; }
-
-        public override string ToString()
-        {
-            return this.color;
-        }
+        Green,
+        Red,
+        Blue,
+        Yellow,
+        White,
+        Black
     }
 }

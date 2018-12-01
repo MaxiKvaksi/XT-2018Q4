@@ -10,6 +10,11 @@ namespace Epam.Task3.MyString
     {
         private char[] characters;
 
+        public MyString()
+        {
+            this.characters = new char[0];
+        }
+
         public MyString(params char[] characters)
         {
             this.characters = characters;

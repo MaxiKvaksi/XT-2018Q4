@@ -11,6 +11,7 @@ namespace Epam.Task3.Employee
         Developer,
         ProjectManager,
         QA,
-        Economist
+        Economist,
+        Trainee
     }
 }

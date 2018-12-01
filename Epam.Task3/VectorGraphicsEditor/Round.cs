@@ -10,22 +10,41 @@ namespace Epam.Task3.VectorGraphicsEditor
     {
         private double radius;
 
+        public Round() : base()
+        {
+            this.radius = 1;
+        }
+
         public Round(double x, double y, double radius, Color borderColor) 
             : base(x: x, y: y, borderColor: borderColor)
         {
             this.Radius = radius;
         }
 
-        public double Radius { get => this.radius; set => this.radius = value; }
+        public double Radius
+        {
+            get => this.radius;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Invalid 'radius' parameter!");
+                }
+                else
+                {
+                    this.radius = value;
+                }
+            }
+        }
 
         public override void Draw()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"The round drawed:{Environment.NewLine}{this.ToString()}");
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()} radius: {this.radius};";
+            return $"Round: {base.ToString()} radius: {this.radius};";
         }
     }
 }

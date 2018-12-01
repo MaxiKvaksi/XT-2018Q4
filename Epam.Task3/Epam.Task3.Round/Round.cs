@@ -34,7 +34,7 @@ namespace Epam.Task3.Round
                 }
                 else
                 {
-                    throw new Exception("Negative radius!");
+                    throw new ArgumentException("Negative radius!");
                 }
             }
         }

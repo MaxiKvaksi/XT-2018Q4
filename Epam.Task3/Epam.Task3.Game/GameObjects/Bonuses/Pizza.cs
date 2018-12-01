@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam.Task3.Game.GameObjects
+namespace Epam.Task3.Game.GameObjects.Objects
 {
-    public abstract class Bonus : GameObject
+    public class Pizza : Bonus
     {
     }
 }

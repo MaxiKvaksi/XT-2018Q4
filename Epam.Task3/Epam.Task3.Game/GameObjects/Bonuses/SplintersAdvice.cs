@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam.Task3.Game.GameObjects
+namespace Epam.Task3.Game.GameObjects.Objects
 {
-    public class Player : GameObject
+    public class SplintersAdvice : Bonus
     {
         public override void Draw()
         {

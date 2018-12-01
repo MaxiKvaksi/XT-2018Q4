@@ -12,6 +12,13 @@ namespace Epam.Task3.VectorGraphicsEditor
         private double y;
         private Color borderColor;
 
+        protected Figure()
+        {
+            this.x = 0;
+            this.y = 0;
+            this.borderColor = Color.Black;
+        }
+
         protected Figure(double x, double y, Color borderColor)
         {
             this.X = x;
@@ -29,7 +36,7 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         public override string ToString()
         {
-            return $"x: {this.x};: {this.y}; border color: {this.borderColor.ToString()};";
+            return $"x: {this.x}; y: {this.y}; border color: {this.borderColor.ToString()};";
         }
     }
 }

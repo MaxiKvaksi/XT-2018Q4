@@ -11,6 +11,12 @@ namespace Epam.Task3.VectorGraphicsEditor
         private double a;
         private double b;
 
+        public Rectangle() : base()
+        {
+            this.a = 1;
+            this.b = 1;
+        }
+
         public Rectangle(double x, double y, double a, double b, Color borderColor, Color fiilColor)
             : base(x: x, y: y, borderColor: borderColor, fiilColor: fiilColor)
         {
@@ -18,13 +24,41 @@ namespace Epam.Task3.VectorGraphicsEditor
             this.B = b;
         }
 
-        public double A { get => this.a; set => this.a = value; }
+        public double A
+        {
+            get => this.a;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Invalid 'a' parameter!");
+                }
+                else
+                {
+                    this.a = value;
+                }
+            }
+        }
 
-        public double B { get => this.b; set => this.b = value; }
+        public double B
+        {
+            get => this.b;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Invalid 'b' parameter!");
+                }
+                else
+                {
+                    this.b = value;
+                }
+            }
+        }
 
         public override void Draw()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"The rect drawed:{Environment.NewLine}{this.ToString()}");
         }
 
         public override void Fill(bool isFill)
@@ -34,7 +68,7 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         public override string ToString()
         {
-            return $"{base.ToString()} a: {this.a}; b: {this.b};";
+            return $"Rectangle: {base.ToString()} a: {this.a}; b: {this.b};";
         }
     }
 }

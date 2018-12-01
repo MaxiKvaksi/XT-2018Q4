@@ -18,12 +18,24 @@ namespace Epam.Task3.Triangle
                 || a + c < b
                 || c + b < a)
             {
-                throw new Exception("One side more than sum of two other!");
+                throw new ArgumentException("One side more than sum of two other!");
             }
 
-            this.A = a;
-            this.B = b;
-            this.C = c;
+            if (a < 0 || b < 0 || c < 0)
+            {
+                throw new ArgumentException("One side is negative!");
+            }
+
+            this.a = a;
+            this.b = b;
+            this.c = c;
+        }
+
+        private enum Side
+        {
+            A,
+            B,
+            C
         }
 
         public double A
@@ -33,11 +45,18 @@ namespace Epam.Task3.Triangle
             {
                 if (value >= 0)
                 {
-                    this.a = value;
+                    if (value > this.c + this.b)
+                    {
+                        throw new ArgumentException("The 'a' side more than sum of two other!");
+                    }
+                    else
+                    {
+                        this.a = value;
+                    }
                 }
                 else
                 {
-                    throw new Exception("Negative value side!");
+                    throw new ArgumentException("Negative value side!");
                 }
             }
         }
@@ -49,11 +68,18 @@ namespace Epam.Task3.Triangle
             {
                 if (value >= 0)
                 {
-                    this.b = value;
+                    if (value > this.a + this.c)
+                    {
+                        throw new ArgumentException("The 'b' side more than sum of two other!");
+                    }
+                    else
+                    {
+                        this.b = value;
+                    }
                 }
                 else
                 {
-                    throw new Exception("Negative value side!");
+                    throw new ArgumentException("Negative value side!");
                 }
             }
         }
@@ -65,11 +91,18 @@ namespace Epam.Task3.Triangle
             {
                 if (value >= 0)
                 {
-                    this.c = value;
+                    if (value > this.a + this.b)
+                    {
+                        throw new ArgumentException("The 'c' side more than sum of two other!");
+                    }
+                    else
+                    {
+                        this.c = value;
+                    }
                 }
                 else
                 {
-                    throw new Exception("Negative value side!");
+                    throw new ArgumentException("Negative value side!");
                 }
             }
         }

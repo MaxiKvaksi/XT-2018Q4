@@ -13,8 +13,10 @@ namespace Epam.Task3.Round
             Console.WriteLine("The application demonstrates the class 'Round' using." + Environment.NewLine);
             Round round = new Round(x: 0, y: 0, radius: 1);
             Console.WriteLine("1: " + round);
-            round = new Round(23, 0.76, 1.33);
+            round = new Round(23, -0.76, 1.33);
             Console.WriteLine("2: " + round);
+            round.Radius = 3;
+            Console.WriteLine($"New round radius for 2 round: {round.Radius}");
         }
     }
 }

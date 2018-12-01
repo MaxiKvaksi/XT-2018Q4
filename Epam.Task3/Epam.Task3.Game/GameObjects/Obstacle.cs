@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Task3.Game.GameObjects
 {
-    class Obstacle
+    public abstract class Obstacle : GameObject
     {
     }
 }

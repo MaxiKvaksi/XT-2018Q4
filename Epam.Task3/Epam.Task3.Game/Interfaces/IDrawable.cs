@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam.Task3.Game.GameObjects
+namespace Epam.Task3.Game.Interfaces
 {
-    public abstract class Bonus : GameObject
+    public interface IDrawable
     {
+        void Draw();
     }
 }

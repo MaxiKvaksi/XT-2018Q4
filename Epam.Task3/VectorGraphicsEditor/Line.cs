@@ -11,6 +11,12 @@ namespace Epam.Task3.VectorGraphicsEditor
         private double x2;
         private double y2;
 
+        public Line() : base()
+        {
+            this.x2 = 1;
+            this.y2 = 1;
+        }
+
         public Line(double x, double y, double x2, double y2, Color borderColor) : base(x, y, borderColor)
         {
             this.X2 = x2;
@@ -23,12 +29,12 @@ namespace Epam.Task3.VectorGraphicsEditor
 
         public override void Draw()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"The line drawed:{Environment.NewLine}{this.ToString()}");
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()} x2: {this.x2}; y2: {this.y2};";
+            return $"Line: {base.ToString()} x2: {this.x2}; y2: {this.y2};";
         }
     }
 }

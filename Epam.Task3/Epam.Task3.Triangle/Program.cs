@@ -13,7 +13,7 @@ namespace Epam.Task3.Triangle
             Console.WriteLine("The application demonstrates the class 'Triangle' using." + Environment.NewLine);
             Triangle triangle = new Triangle(a: 3, b: 4, c: 5);
             Console.WriteLine("1: " + triangle);
-            triangle = new Triangle(23, 0.76, 1.33);
+            triangle = new Triangle(1, 0.76, 1.33);
             Console.WriteLine("2: " + triangle);
         }
     }

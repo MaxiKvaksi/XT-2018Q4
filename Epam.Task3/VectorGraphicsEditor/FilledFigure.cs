@@ -7,6 +7,11 @@ namespace Epam.Task3.VectorGraphicsEditor
     {
         private Color fiilColor;
 
+        protected FilledFigure() : base()
+        {
+            this.fiilColor = Color.White;
+        }
+
         protected FilledFigure(double x, double y, Color borderColor, Color fiilColor) : base(x: x, y: y, borderColor: borderColor)
         {
             this.FiilColor = fiilColor;
