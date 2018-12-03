@@ -14,27 +14,22 @@ namespace Epam.Task1.Sequence
                 "\n\nInput the quantity of numbers:");
             if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
             {
-                int[] numbers = GetNumbers(n + 1);
-                for (int i = 0; i < n; i++)
-                {
-                    Console.Write($"{numbers[i]}, ");
-                }
-                Console.WriteLine(numbers[n]);
-            }else
+                ShowNumbers(n);
+            }
+            else
             {
                 Console.WriteLine("Uncorrect input!");
             }
         }
 
-        public static int[] GetNumbers(int n)
+        private static void ShowNumbers(int n)
         {
-            int[] array = new int[n];
             for (int i = 0; i < n; i++)
             {
-                array[i] = i;
+                Console.Write($"{i}, ");
             }
 
-            return array;
+            Console.WriteLine(n);
         }
     }
 }

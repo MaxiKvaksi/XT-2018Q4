@@ -1,9 +1,9 @@
 ﻿using System;
-using Epam.Task3.User;
+using Epam.Task3.MyUser;
 
 namespace Epam.Task3.Employee
 {
-    public class Employee : User.MyUserClass
+    public class Employee : MyUser.MyUserClass
     {
         private Position position;
         private int workExperience;

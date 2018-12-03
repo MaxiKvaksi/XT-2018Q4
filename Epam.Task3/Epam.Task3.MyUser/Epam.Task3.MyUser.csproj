@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AB2D9A49-4B35-4FD6-87C2-BC48C22E2C0C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Epam.Task3.Employee</RootNamespace>
-    <AssemblyName>Epam.Task3.Employee</AssemblyName>
+    <ProjectGuid>{6DC0E41F-BDF8-4C4F-95C7-02A1ED58D707}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Epam.Task3.MyUser</RootNamespace>
+    <AssemblyName>Epam.Task3.MyUser</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,19 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employee.cs" />
-    <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MyUserClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Epam.Task3.MyUser\Epam.Task3.MyUser.csproj">
-      <Project>{6dc0e41f-bdf8-4c4f-95c7-02a1ed58d707}</Project>
-      <Name>Epam.Task3.MyUser</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

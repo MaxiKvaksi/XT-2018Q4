@@ -4,6 +4,8 @@ namespace Epam.Task2.NoPositive
 {
     public class Program
     {
+        const int SizeOf3DArray = 2;
+
         public static void Main(string[] args)
         {
             Console.WriteLine("The application which change positive numbers to zeros in 3D array.");
@@ -18,8 +20,8 @@ namespace Epam.Task2.NoPositive
         public static int[,,] Get3DArray(out int[,,] array3d)
         {
             Random random = new Random();
-            const int Size = 2;
-            array3d = new int[Size, Size, Size];
+            
+            array3d = new int[SizeOf3DArray, SizeOf3DArray, SizeOf3DArray];
             for (int i = 0; i < array3d.GetLength(0); i++)
             {
                 for (int j = 0; j < array3d.GetLength(1); j++)

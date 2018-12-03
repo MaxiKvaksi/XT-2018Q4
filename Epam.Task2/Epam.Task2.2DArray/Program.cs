@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Epam.Task2._2DArray
 {
@@ -41,7 +42,7 @@ namespace Epam.Task2._2DArray
             {
                 for (int j = 0; j < array.GetLength(0); j++)
                 {
-                    Console.Write(array[i, j] + " ");
+                    Console.Write(string.Format(" {0}", array[i, j]));
                 }
 
                 Console.WriteLine();
