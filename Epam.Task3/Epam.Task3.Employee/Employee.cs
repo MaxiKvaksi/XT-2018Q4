@@ -3,7 +3,7 @@ using Epam.Task3.User;
 
 namespace Epam.Task3.Employee
 {
-    public class Employee : User.User
+    public class Employee : User.MyUserClass
     {
         private Position position;
         private int workExperience;

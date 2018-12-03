@@ -14,11 +14,6 @@ namespace Epam.Task3.Game.GameObjects.Obstakles
             throw new NotImplementedException();
         }
 
-        public void Interact()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Interact()
         {
             throw new NotImplementedException();

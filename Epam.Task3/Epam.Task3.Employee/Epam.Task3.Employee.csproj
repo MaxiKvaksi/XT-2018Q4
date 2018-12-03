@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Epam.Task3.User\Epam.Task3.User.csproj">
+    <ProjectReference Include="..\Epam.Task3.User\Epam.Task3.MyUser.csproj">
       <Project>{6DC0E41F-BDF8-4C4F-95C7-02A1ED58D707}</Project>
-      <Name>Epam.Task3.User</Name>
+      <Name>Epam.Task3.MyUser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
