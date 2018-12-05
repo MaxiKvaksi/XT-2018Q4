@@ -23,6 +23,7 @@ namespace Epam.Task3.MyString
             Console.WriteLine("Using 'GetHashCode' function for first string: " + myString.GetHashCode());
             Console.WriteLine("Using 'IndexOf' function for first string with 'b' character: " + myString.IndexOf('b'));
             Console.WriteLine("Using 'ToCharArray' function for first string: " + myString.ToCharArray());
+            Console.WriteLine("Using 'ToStringBuilder' function for first string: " + myString.ToStringBuilder());
         }
     }
 }

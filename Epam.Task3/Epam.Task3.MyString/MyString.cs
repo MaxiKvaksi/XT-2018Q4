@@ -79,6 +79,13 @@ namespace Epam.Task3.MyString
             return new string(this.characters);
         }
 
+        public StringBuilder ToStringBuilder()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(this.characters);
+            return sb;
+        }
+
         public MyString Concat(MyString myString)
         {
             char[] characters = new char[this.Length + myString.Length];
