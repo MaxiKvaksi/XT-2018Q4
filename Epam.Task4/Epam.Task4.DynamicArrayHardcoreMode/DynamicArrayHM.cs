@@ -4,7 +4,7 @@ using Epam.Task4.DynamicArray;
 
 namespace Epam.Task4.DynamicArrayHardcoreMode
 {
-    public class DynamicArrayHM<T> : DynamicArray.DynamicArray<T>, ICloneable
+    public class DynamicArrayHM<T> : DynamicArray<T>, ICloneable
     {
         public DynamicArrayHM() : base()
         {
@@ -90,14 +90,14 @@ namespace Epam.Task4.DynamicArrayHardcoreMode
             this.Capacity = value;
         }
 
-        object ICloneable.Clone()
-        {
-            return new Exception("Is deprecated!");
-        }
-
         public T[] ToArray()
         {
             return this.array;
+        }
+
+        public object Clone()
+        {
+            return new DynamicArrayHM<T>(this.array);
         }
     }
 }

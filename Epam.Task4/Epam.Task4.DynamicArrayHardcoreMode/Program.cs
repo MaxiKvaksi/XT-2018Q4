@@ -28,6 +28,9 @@ namespace Epam.Task4.DynamicArrayHardcoreMode
                     break;
                 }
             }
+            Console.WriteLine();
+            Console.WriteLine("ReferenceEquals between dynamic array and its clone. They is equal:");
+            Console.WriteLine(ReferenceEquals(dynamicArrayHM, dynamicArrayHM.Clone()));
         }
     }
 }
