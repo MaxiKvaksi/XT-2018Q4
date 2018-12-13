@@ -42,11 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MethodType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.Task5.CustomSort\Epam.Task5.CustomSort.csproj">
+      <Project>{8711d491-999b-4fa7-8ec5-dbe36de0ed62}</Project>
+      <Name>Epam.Task5.CustomSort</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
