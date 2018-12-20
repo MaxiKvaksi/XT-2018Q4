@@ -9,23 +9,19 @@ namespace Epam.Task6.BackupSystem
 {
     public class FileHelper
     {
-        private static string backUpPath = @"backup.txt";
         private static StreamReader streamReader;
 
-        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
-
-        public static bool BackUpFileExists(string fileName)
+        public static bool BackUpFileExists()
         {
-            var directoryInfo = new FileInfo(backUpPath);
+            var directoryInfo = new FileInfo(BackupManager.BackUpPath);
             return directoryInfo.Exists;
         }
 
-        public static bool CreateBackUpFile(string path)
+        public static bool CreateBackUpFile()
         {
             try
             {
-                backUpPath = Path.Combine(path, "backup.txt");
-                CreateFile(backUpPath);
+                CreateFile(BackupManager.BackUpPath);
                 return true;
             }
             catch (Exception e)
@@ -52,7 +48,7 @@ namespace Epam.Task6.BackupSystem
 
         public static void AppendToFile(Change change)
         {
-            using (StreamWriter writer = File.AppendText(backUpPath))
+            using (StreamWriter writer = File.AppendText(BackupManager.BackUpPath))
             {
                 try
                 {
@@ -67,7 +63,7 @@ namespace Epam.Task6.BackupSystem
 
         public static bool IsBackUpFile(string filePath)
         {
-            return filePath.Equals(BackUpPath);
+            return filePath.Equals(BackupManager.BackUpPath);
         }
 
         public static bool ReadStringFromFile(out string readedString)
@@ -94,7 +90,7 @@ namespace Epam.Task6.BackupSystem
         {
             if (streamReader == null)
             {
-                streamReader = new StreamReader(backUpPath);
+                streamReader = new StreamReader(BackupManager.BackUpPath);
             }
         }
 

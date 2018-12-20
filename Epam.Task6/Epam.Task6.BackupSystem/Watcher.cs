@@ -7,12 +7,13 @@ namespace Epam.Task6.BackupSystem
     class Watcher
     {
         private static int changesCounter = 0;
-        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        public static void Run(string path)
+        private static  FileSystemWatcher watcher;
+       [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        public static void Run()
         {
-            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher = new FileSystemWatcher();
             watcher.IncludeSubdirectories = true;
-            watcher.Path = path;
+            watcher.Path = BackupManager.CurrentPath;
             watcher.NotifyFilter = NotifyFilters.LastWrite
                | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             watcher.Filter = "*.txt";
@@ -24,12 +25,12 @@ namespace Epam.Task6.BackupSystem
 
             watcher.EnableRaisingEvents = true;
             changesCounter = 0;
-            Console.WriteLine("Type 'q' to stop listen");
+            /*Console.WriteLine("Type 'q' to stop listen");
             while (Console.Read() != 'q');
             watcher.Changed -= OnChanged;
             watcher.Created -= OnChanged;
             watcher.Deleted -= OnChanged;
-            watcher.Renamed -= OnRenamed;
+            watcher.Renamed -= OnRenamed;*/
         }
 
         private static void OnChanged(object source, FileSystemEventArgs e)
@@ -54,6 +55,17 @@ namespace Epam.Task6.BackupSystem
         {
             changesCounter++;
             Console.Write($"\rChanges:{changesCounter}");
+        }
+
+        internal static void Stop()
+        {
+            if (watcher != null)
+            {
+                watcher.Changed -= OnChanged;
+                watcher.Created -= OnChanged;
+                watcher.Deleted -= OnChanged;
+                watcher.Renamed -= OnRenamed;
+            }
         }
     }
 }
