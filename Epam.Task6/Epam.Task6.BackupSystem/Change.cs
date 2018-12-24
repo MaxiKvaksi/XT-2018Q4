@@ -12,6 +12,7 @@ namespace Epam.Task6.BackupSystem
         private DateTime dateTime;
         private string fullPath;
         private string previewFullPath;
+        private string content;
 
         public Change(DateTime dateTime, ChangeType changeType, string fullPath)
         {
@@ -33,6 +34,7 @@ namespace Epam.Task6.BackupSystem
         public ChangeType ChangeType { get => this.changeType; set => this.changeType = value; }
 
         public string PreviewFullPath { get => this.previewFullPath; set => this.previewFullPath = value; }
+        public string Content { get => content; set => content = value; }
 
         public override string ToString()
         {
@@ -47,6 +49,7 @@ namespace Epam.Task6.BackupSystem
                     result = string.Concat(result, $"#{PreviewFullPath}");
                     break;
                 case ChangeType.Change:
+                    result = string.Concat(result, $"#{Content}");
                     break;
             }
 

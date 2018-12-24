@@ -9,25 +9,29 @@ namespace Epam.Task6.BackupSystem
     public static class BackupManager
     {
         private static DateTime lastBackupTime;
-        private static string backUpPath;
+        private static string backupPath;
+        private static string backupFolderPath;
         private static string currentPath;
         public const string BackupFileName = "backup.txt";
+        public const string BackupFolderName = "backupFolder.txt";
         private static List<Change> changes = new List<Change>();
-        private static Thread watchThread;
 
         public static List<Change> Changes { get => changes; set => changes = value; }
-        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
+        public static string BackupPath { get => backupPath; set => backupPath = value; }
         public static string CurrentPath
         {
             get => currentPath;
             set
             {
                 currentPath = value;
-                backUpPath = Path.Combine(currentPath, BackupManager.BackupFileName);
+                backupPath = Path.Combine(currentPath, BackupManager.BackupFileName);
+                BackupFolderPath = Path.Combine(BackupManager.CurrentPath,
+                    BackupManager.BackupFolderName);
             }
         }
 
         public static DateTime LastBackupTime { get => lastBackupTime; set => lastBackupTime = value; }
+        public static string BackupFolderPath { get => backupFolderPath; set => backupFolderPath = value; }
 
         public static void InitBackUpManager()
         {
@@ -54,31 +58,7 @@ namespace Epam.Task6.BackupSystem
             }
             int index;
             Change[] array = changesSet.ToArray();
-            for (int i = 0; i < array.Length; i++)
-            {
-                index = Changes.IndexOf(array[i]);
-                switch (array[i].ChangeType)
-                {
-                    case ChangeType.Create:
-                        FileHelper.DeleteFile(array[i].FullPath);
-                        Changes[index].ChangeType = ChangeType.Delete;
-                        break;
-                    case ChangeType.Change:
-                        break;
-                    case ChangeType.Rename:
-                        FileHelper.RenameFile(array[i].FullPath, array[i].PreviewFullPath);
-                        Changes[index].ChangeType = ChangeType.Rename;
-                        var temp = Changes[index].FullPath;
-                        Changes[index].FullPath = Changes[index].PreviewFullPath;
-                        Changes[index].PreviewFullPath = temp;
-                        break;
-                    case ChangeType.Delete:
-                        FileHelper.CreateFile(array[i].FullPath);
-                        Changes[index].ChangeType = ChangeType.Create;
-                        break;
-                }
-            }
-            /*foreach (var item in changesSet)
+            foreach (var item in changesSet)
             {   
                 index = Changes.IndexOf(item);
                 switch (item.ChangeType)
@@ -101,7 +81,7 @@ namespace Epam.Task6.BackupSystem
                         Changes[index].ChangeType = ChangeType.Create;
                         break;
                 }
-            }*/
+            }
             LastBackupTime = dateTime;
         }
 
