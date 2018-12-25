@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+<<<<<<< HEAD
 using System.Linq;
+=======
+>>>>>>> parent of e53564f... Task6(ver0.2)
 
 namespace Epam.Task6.BackupSystem
 {
     public static class BackupManager
     {
+<<<<<<< HEAD
         public const string BackupFileName = "backup.txt";
         public const string BackupFolderName = "backupFolder";
         private static DateTime lastBackupTime;
@@ -32,6 +36,12 @@ namespace Epam.Task6.BackupSystem
         }
 
         public static DateTime LastBackupTime { get => lastBackupTime; set => lastBackupTime = value; }
+=======
+        private static DateTime lastRestoreTime;
+        private static List<Change> changes = new List<Change>();
+
+        public static List<Change> Changes { get => changes; set => changes = value; }
+>>>>>>> parent of e53564f... Task6(ver0.2)
 
         public static string BackupFolderPath { get => backupFolderPath; set => backupFolderPath = value; }
 
@@ -39,11 +49,12 @@ namespace Epam.Task6.BackupSystem
 
         public static void InitBackUpManager()
         {
-            LastBackupTime = DateTime.Now;
+            lastRestoreTime = DateTime.Now;
         }
 
         public static void RestoreFiles(DateTime dateTime)
         {
+<<<<<<< HEAD
             bool toFuture = dateTime < lastBackupTime;
             var changesSet = toFuture
                 ?
@@ -68,11 +79,19 @@ namespace Epam.Task6.BackupSystem
             {   
                 index = Changes.IndexOf(item);
                 Change change = Changes[index];
+=======
+            foreach (var item in Changes)
+            {   
+                if (item.DateTime < dateTime)
+                {
+                    return;
+                }
+
+>>>>>>> parent of e53564f... Task6(ver0.2)
                 switch (item.ChangeType)
                 {
                     case ChangeType.Create:
                         FileHelper.DeleteFile(item.FullPath);
-                        Changes[index].ChangeType = ChangeType.Delete;
                         break;
                     case ChangeType.Change:
                         try
@@ -94,17 +113,20 @@ namespace Epam.Task6.BackupSystem
                         break;
                     case ChangeType.Rename:
                         FileHelper.RenameFile(item.FullPath, item.PreviewFullPath);
+<<<<<<< HEAD
                         change.ChangeType = ChangeType.Rename;
                         var temp = Changes[index].FullPath;
                         change.FullPath = Changes[index].PreviewFullPath;
                         Changes[index].PreviewFullPath = temp;
+=======
+>>>>>>> parent of e53564f... Task6(ver0.2)
                         break;
                     case ChangeType.Delete:
                         FileHelper.CreateFile(item.FullPath);
-                        Changes[index].ChangeType = ChangeType.Create;
                         break;
                 }
             }
+<<<<<<< HEAD
 
             LastBackupTime = dateTime;
         }
@@ -113,15 +135,14 @@ namespace Epam.Task6.BackupSystem
         {
             Watcher.Run();
         }
+=======
+>>>>>>> parent of e53564f... Task6(ver0.2)
 
-        public static void StopWatch()
-        {
-            Watcher.Stop();
+            lastRestoreTime = dateTime;
         }
 
         public static bool ParseChanges()
         {
-            lastBackupTime = DateTime.Now;
             if (changes == null)
             {
                 changes = new List<Change>();
@@ -183,6 +204,7 @@ namespace Epam.Task6.BackupSystem
 
             return true;
         }
+<<<<<<< HEAD
 
         public static void AddInnerChange(string filename)
         {
@@ -203,4 +225,7 @@ namespace Epam.Task6.BackupSystem
             return splited[0].Substring(0, i) + "\\" + splited[1];
         }
     } 
+=======
+    }
+>>>>>>> parent of e53564f... Task6(ver0.2)
 }

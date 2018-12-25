@@ -9,20 +9,32 @@ namespace Epam.Task6.BackupSystem
 {
     public class FileHelper
     {
+        private static string backUpPath = @"backup.txt";
         private static StreamReader streamReader;
 
-        public static bool BackUpFileExists()
+        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
+
+        public static bool BackUpFileExists(string fileName)
         {
+<<<<<<< HEAD
             var directoryInfo = new FileInfo(BackupManager.BackupPath);
+=======
+            var directoryInfo = new FileInfo(backUpPath);
+>>>>>>> parent of e53564f... Task6(ver0.2)
             return directoryInfo.Exists;
         }
 
-        public static bool CreateBackUpFile()
+        public static bool CreateBackUpFile(string path)
         {
             try
             {
+<<<<<<< HEAD
                 CreateFile(BackupManager.BackupPath);
                 CreateChangeContentDependincies();
+=======
+                backUpPath = Path.Combine(path, "backup.txt");
+                CreateFile(backUpPath);
+>>>>>>> parent of e53564f... Task6(ver0.2)
                 return true;
             }
             catch (Exception e)
@@ -49,12 +61,16 @@ namespace Epam.Task6.BackupSystem
 
         public static void AppendChangeToFile(Change change)
         {
+<<<<<<< HEAD
             AppendToFile(BackupManager.BackupPath, change.ToString());
         }
 
         public static void AppendToFile(string path, string info)
         {
             try
+=======
+            using (StreamWriter writer = File.AppendText(backUpPath))
+>>>>>>> parent of e53564f... Task6(ver0.2)
             {
                 using (StreamWriter writer = File.AppendText(path))
                 {
@@ -69,7 +85,11 @@ namespace Epam.Task6.BackupSystem
 
         public static bool IsBackUpFile(string filePath)
         {
+<<<<<<< HEAD
             return filePath.Equals(BackupManager.BackupPath);
+=======
+            return filePath.Equals(BackUpPath);
+>>>>>>> parent of e53564f... Task6(ver0.2)
         }
 
         public static bool ReadStringFromFile(out string readedString)
@@ -96,7 +116,11 @@ namespace Epam.Task6.BackupSystem
         {
             if (streamReader == null)
             {
+<<<<<<< HEAD
                 streamReader = new StreamReader(path);
+=======
+                streamReader = new StreamReader(backUpPath);
+>>>>>>> parent of e53564f... Task6(ver0.2)
             }
         }
 

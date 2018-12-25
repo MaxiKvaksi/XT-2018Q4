@@ -7,14 +7,25 @@ namespace Epam.Task6.BackupSystem
     public class Watcher
     {
         private static int changesCounter = 0;
+<<<<<<< HEAD
         private static FileSystemWatcher watcher;
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public static void Run()
+=======
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        public static void Run(string path)
+>>>>>>> parent of e53564f... Task6(ver0.2)
         {
-            watcher = new FileSystemWatcher();
+            FileSystemWatcher watcher = new FileSystemWatcher();
             watcher.IncludeSubdirectories = true;
+<<<<<<< HEAD
             watcher.Path = BackupManager.CurrentPath;
             watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+=======
+            watcher.Path = path;
+            watcher.NotifyFilter = NotifyFilters.LastWrite
+               | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+>>>>>>> parent of e53564f... Task6(ver0.2)
             watcher.Filter = "*.txt";
 
             watcher.Changed += new FileSystemEventHandler(OnChanged);
@@ -24,6 +35,15 @@ namespace Epam.Task6.BackupSystem
 
             watcher.EnableRaisingEvents = true;
             changesCounter = 0;
+<<<<<<< HEAD
+=======
+            Console.WriteLine("Type 'q' to stop listen");
+            while (Console.Read() != 'q');
+            watcher.Changed -= OnChanged;
+            watcher.Created -= OnChanged;
+            watcher.Deleted -= OnChanged;
+            watcher.Renamed -= OnRenamed;
+>>>>>>> parent of e53564f... Task6(ver0.2)
         }
 
         private static void OnChanged(object source, FileSystemEventArgs e)
@@ -49,6 +69,7 @@ namespace Epam.Task6.BackupSystem
             }
         }
 
+<<<<<<< HEAD
         internal static void Stop()
         {
             if (watcher != null)
@@ -58,6 +79,12 @@ namespace Epam.Task6.BackupSystem
                 watcher.Deleted -= OnChanged;
                 watcher.Renamed -= OnRenamed;
             }
+=======
+        private static void UpdateChangesCounter()
+        {
+            changesCounter++;
+            Console.Write($"\rChanges:{changesCounter}");
+>>>>>>> parent of e53564f... Task6(ver0.2)
         }
     }
 }
