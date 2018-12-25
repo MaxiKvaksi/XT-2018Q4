@@ -14,9 +14,9 @@ namespace Epam.Task6.BackupSystem
         public const string BackupFileName = "backup.txt";
         public const string BackupFolderName = "backupFolder";
         private static DateTime lastBackupTime;
-        private static string backupPath;
-        private static string backupFolderPath;
+        private static string backUpPath;
         private static string currentPath;
+<<<<<<< HEAD
         private static List<Change> changes = new List<Change>();
         private static Dictionary<string, List<InnerChange>> innerChanges = new Dictionary<string, List<InnerChange>>();
 
@@ -24,18 +24,31 @@ namespace Epam.Task6.BackupSystem
 
         public static string BackupPath { get => backupPath; set => backupPath = value; }
 
+=======
+        public const string BackupFileName = "backup.txt";
+        private static List<Change> changes = new List<Change>();
+        private static Thread watchThread;
+
+        public static List<Change> Changes { get => changes; set => changes = value; }
+        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
+>>>>>>> parent of a705b46... Task6(ver2.1)
         public static string CurrentPath
         {
             get => currentPath;
             set
             {
                 currentPath = value;
+<<<<<<< HEAD
                 backupPath = Path.Combine(currentPath, BackupFileName);
                 backupFolderPath = Path.Combine(CurrentPath, BackupFolderName);
+=======
+                backUpPath = Path.Combine(currentPath, BackupManager.BackupFileName);
+>>>>>>> parent of a705b46... Task6(ver2.1)
             }
         }
 
         public static DateTime LastBackupTime { get => lastBackupTime; set => lastBackupTime = value; }
+<<<<<<< HEAD
 =======
         private static DateTime lastRestoreTime;
         private static List<Change> changes = new List<Change>();
@@ -44,6 +57,8 @@ namespace Epam.Task6.BackupSystem
 >>>>>>> parent of e53564f... Task6(ver0.2)
 
         public static string BackupFolderPath { get => backupFolderPath; set => backupFolderPath = value; }
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 
         public static Dictionary<string, List<InnerChange>> InnerChanges { get => innerChanges; set => innerChanges = value; }
 
@@ -75,7 +90,31 @@ namespace Epam.Task6.BackupSystem
 
             int index;
             Change[] array = changesSet.ToArray();
-            foreach (var item in changesSet)
+            for (int i = 0; i < array.Length; i++)
+            {
+                index = Changes.IndexOf(array[i]);
+                switch (array[i].ChangeType)
+                {
+                    case ChangeType.Create:
+                        FileHelper.DeleteFile(array[i].FullPath);
+                        Changes[index].ChangeType = ChangeType.Delete;
+                        break;
+                    case ChangeType.Change:
+                        break;
+                    case ChangeType.Rename:
+                        FileHelper.RenameFile(array[i].FullPath, array[i].PreviewFullPath);
+                        Changes[index].ChangeType = ChangeType.Rename;
+                        var temp = Changes[index].FullPath;
+                        Changes[index].FullPath = Changes[index].PreviewFullPath;
+                        Changes[index].PreviewFullPath = temp;
+                        break;
+                    case ChangeType.Delete:
+                        FileHelper.CreateFile(array[i].FullPath);
+                        Changes[index].ChangeType = ChangeType.Create;
+                        break;
+                }
+            }
+            /*foreach (var item in changesSet)
             {   
                 index = Changes.IndexOf(item);
                 Change change = Changes[index];
@@ -125,9 +164,13 @@ namespace Epam.Task6.BackupSystem
                         FileHelper.CreateFile(item.FullPath);
                         break;
                 }
+<<<<<<< HEAD
             }
 <<<<<<< HEAD
 
+=======
+            }*/
+>>>>>>> parent of a705b46... Task6(ver2.1)
             LastBackupTime = dateTime;
         }
 

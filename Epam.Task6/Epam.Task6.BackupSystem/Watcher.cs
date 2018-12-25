@@ -36,14 +36,22 @@ namespace Epam.Task6.BackupSystem
             watcher.EnableRaisingEvents = true;
             changesCounter = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             Console.WriteLine("Type 'q' to stop listen");
+=======
+            /*Console.WriteLine("Type 'q' to stop listen");
+>>>>>>> parent of a705b46... Task6(ver2.1)
             while (Console.Read() != 'q');
             watcher.Changed -= OnChanged;
             watcher.Created -= OnChanged;
             watcher.Deleted -= OnChanged;
+<<<<<<< HEAD
             watcher.Renamed -= OnRenamed;
 >>>>>>> parent of e53564f... Task6(ver0.2)
+=======
+            watcher.Renamed -= OnRenamed;*/
+>>>>>>> parent of a705b46... Task6(ver2.1)
         }
 
         private static void OnChanged(object source, FileSystemEventArgs e)

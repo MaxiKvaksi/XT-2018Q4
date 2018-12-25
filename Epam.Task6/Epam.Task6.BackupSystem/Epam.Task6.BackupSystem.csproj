@@ -43,14 +43,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupManager.cs" />
+<<<<<<< HEAD
     <Compile Include="Change.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+=======
+    <Compile Include="Change.cs" />
+    <Compile Include="ChangeType.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+>>>>>>> parent of a705b46... Task6(ver2.1)
     </Compile>
     <Compile Include="ChangeType.cs" />
     <Compile Include="FileHelper.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="InnerChange.cs" />
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
 <<<<<<< HEAD
