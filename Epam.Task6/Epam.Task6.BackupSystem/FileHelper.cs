@@ -19,10 +19,14 @@ namespace Epam.Task6.BackupSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             var directoryInfo = new FileInfo(BackupManager.BackupPath);
 =======
             var directoryInfo = new FileInfo(backUpPath);
 >>>>>>> parent of e53564f... Task6(ver0.2)
+=======
+            var directoryInfo = new FileInfo(BackupManager.BackUpPath);
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
             var directoryInfo = new FileInfo(BackupManager.BackUpPath);
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -39,12 +43,16 @@ namespace Epam.Task6.BackupSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 CreateFile(BackupManager.BackupPath);
                 CreateChangeContentDependincies();
 =======
                 backUpPath = Path.Combine(path, "backup.txt");
                 CreateFile(backUpPath);
 >>>>>>> parent of e53564f... Task6(ver0.2)
+=======
+                CreateFile(BackupManager.BackUpPath);
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
                 CreateFile(BackupManager.BackUpPath);
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -80,6 +88,7 @@ namespace Epam.Task6.BackupSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             AppendToFile(BackupManager.BackupPath, change.ToString());
         }
 
@@ -89,6 +98,9 @@ namespace Epam.Task6.BackupSystem
 =======
             using (StreamWriter writer = File.AppendText(backUpPath))
 >>>>>>> parent of e53564f... Task6(ver0.2)
+=======
+            using (StreamWriter writer = File.AppendText(BackupManager.BackUpPath))
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
             using (StreamWriter writer = File.AppendText(BackupManager.BackUpPath))
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -112,10 +124,14 @@ namespace Epam.Task6.BackupSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             return filePath.Equals(BackupManager.BackupPath);
 =======
             return filePath.Equals(BackUpPath);
 >>>>>>> parent of e53564f... Task6(ver0.2)
+=======
+            return filePath.Equals(BackupManager.BackUpPath);
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
             return filePath.Equals(BackupManager.BackUpPath);
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -151,10 +167,14 @@ namespace Epam.Task6.BackupSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 streamReader = new StreamReader(path);
 =======
                 streamReader = new StreamReader(backUpPath);
 >>>>>>> parent of e53564f... Task6(ver0.2)
+=======
+                streamReader = new StreamReader(BackupManager.BackUpPath);
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
                 streamReader = new StreamReader(BackupManager.BackUpPath);
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -171,6 +191,7 @@ namespace Epam.Task6.BackupSystem
                 streamReader.Close();
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -225,6 +246,8 @@ namespace Epam.Task6.BackupSystem
         {
             return File.ReadAllText(file);
         }
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
 >>>>>>> parent of a705b46... Task6(ver2.1)
 =======
