@@ -38,12 +38,8 @@ namespace Epam.Task6.BackupSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
             Console.WriteLine("Type 'q' to stop listen");
-=======
-            /*Console.WriteLine("Type 'q' to stop listen");
->>>>>>> parent of a705b46... Task6(ver2.1)
 =======
             /*Console.WriteLine("Type 'q' to stop listen");
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -56,12 +52,8 @@ namespace Epam.Task6.BackupSystem
             watcher.Deleted -= OnChanged;
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
             watcher.Renamed -= OnRenamed;
 >>>>>>> parent of e53564f... Task6(ver0.2)
-=======
-            watcher.Renamed -= OnRenamed;*/
->>>>>>> parent of a705b46... Task6(ver2.1)
 =======
             watcher.Renamed -= OnRenamed;*/
 >>>>>>> parent of a705b46... Task6(ver2.1)

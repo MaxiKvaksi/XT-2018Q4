@@ -18,7 +18,6 @@ namespace Epam.Task6.BackupSystem
         private static string currentPath;
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         private static List<Change> changes = new List<Change>();
         private static Dictionary<string, List<InnerChange>> innerChanges = new Dictionary<string, List<InnerChange>>();
 
@@ -26,14 +25,6 @@ namespace Epam.Task6.BackupSystem
 
         public static string BackupPath { get => backupPath; set => backupPath = value; }
 
-=======
-        public const string BackupFileName = "backup.txt";
-        private static List<Change> changes = new List<Change>();
-        private static Thread watchThread;
-
-        public static List<Change> Changes { get => changes; set => changes = value; }
-        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
->>>>>>> parent of a705b46... Task6(ver2.1)
 =======
         public const string BackupFileName = "backup.txt";
         private static List<Change> changes = new List<Change>();
@@ -58,12 +49,8 @@ namespace Epam.Task6.BackupSystem
                 currentPath = value;
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
                 backupPath = Path.Combine(currentPath, BackupFileName);
                 backupFolderPath = Path.Combine(CurrentPath, BackupFolderName);
-=======
-                backUpPath = Path.Combine(currentPath, BackupManager.BackupFileName);
->>>>>>> parent of a705b46... Task6(ver2.1)
 =======
                 backUpPath = Path.Combine(currentPath, BackupManager.BackupFileName);
 >>>>>>> parent of a705b46... Task6(ver2.1)
@@ -74,7 +61,6 @@ namespace Epam.Task6.BackupSystem
         }
 
         public static DateTime LastBackupTime { get => lastBackupTime; set => lastBackupTime = value; }
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -89,8 +75,6 @@ namespace Epam.Task6.BackupSystem
 >>>>>>> parent of a705b46... Task6(ver2.1)
 
         public static Dictionary<string, List<InnerChange>> InnerChanges { get => innerChanges; set => innerChanges = value; }
-=======
->>>>>>> parent of a705b46... Task6(ver2.1)
 =======
 >>>>>>> parent of a705b46... Task6(ver2.1)
 
@@ -198,13 +182,9 @@ namespace Epam.Task6.BackupSystem
                 }
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
             }
 <<<<<<< HEAD
 
-=======
-            }*/
->>>>>>> parent of a705b46... Task6(ver2.1)
 =======
             }*/
 >>>>>>> parent of a705b46... Task6(ver2.1)
