@@ -13,8 +13,11 @@ namespace Epam.Task6.BackupSystem
         private string fullPath;
         private string previewFullPath;
 <<<<<<< HEAD
+<<<<<<< HEAD
         private string changedFilePath;
         private string hash;
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
 >>>>>>> parent of a705b46... Task6(ver2.1)
 
@@ -40,10 +43,13 @@ namespace Epam.Task6.BackupSystem
 
         public string PreviewFullPath { get => this.previewFullPath; set => this.previewFullPath = value; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         public string ChangedFilePath { get => this.changedFilePath; set => this.changedFilePath = value; }
 
         public string Hash { get => this.hash; set => this.hash = value; }
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
 >>>>>>> parent of a705b46... Task6(ver2.1)
 
@@ -61,7 +67,10 @@ namespace Epam.Task6.BackupSystem
                     break;
                 case ChangeType.Change:
 <<<<<<< HEAD
+<<<<<<< HEAD
                     result = string.Concat(result, $"#{ChangedFilePath}");
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
 >>>>>>> parent of a705b46... Task6(ver2.1)
                     break;

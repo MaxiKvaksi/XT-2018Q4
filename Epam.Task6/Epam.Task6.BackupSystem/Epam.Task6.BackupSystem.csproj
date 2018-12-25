@@ -59,7 +59,10 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="InnerChange.cs" />
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 =======
 >>>>>>> parent of a705b46... Task6(ver2.1)
     <Compile Include="Program.cs" />
