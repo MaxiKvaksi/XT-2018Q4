@@ -15,20 +15,23 @@ namespace Epam.Task6.BackupSystem
     {
         public Form1()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
-        private void buttonChooseCurrentPath_Click(object sender, EventArgs e)
+        private void ButtonChooseCurrentPath_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialogCurrentPath.ShowDialog() == DialogResult.Cancel)
+            {
                 return;
+            }
+
             BackupManager.CurrentPath = folderBrowserDialogCurrentPath.SelectedPath;
             textBoxCurrentPath.Text = BackupManager.CurrentPath;
             watchingModeButton.Enabled = true;
             recoveryModeButton.Enabled = true;
         }
 
-        private void watchingModeButton_Click(object sender, EventArgs e)
+        private void WatchingModeButton_Click(object sender, EventArgs e)
         {
             if (FileHelper.BackUpFileExists())
             {
@@ -42,6 +45,7 @@ namespace Epam.Task6.BackupSystem
             {
                 FileHelper.CreateBackUpFile();
             }
+
             recoveryModeButton.Enabled = false;
             buttonChooseCurrentPath.Enabled = false;
             panelWatching.Enabled = true;
@@ -50,10 +54,10 @@ namespace Epam.Task6.BackupSystem
             BackupManager.Watch();
         }
 
-        private void recoveryModeButton_Click(object sender, EventArgs e)
+        private void RecoveryModeButton_Click(object sender, EventArgs e)
         {
             buttonChooseCurrentPath.Enabled = false;
-            panelRecovery.Enabled= true;
+            panelRecovery.Enabled = true;
             if (FileHelper.BackUpFileExists())
             {
                 BackupManager.ParseChanges();
@@ -62,10 +66,11 @@ namespace Epam.Task6.BackupSystem
             {
                 DialogResult dialogResult = MessageBox.Show("Backup file not exist in chosen folder.", "Backup file", MessageBoxButtons.OK);
             }
+
             BackupManager.LastBackupTime = DateTime.Now;
         }
 
-        private void buttonStopWatch_Click(object sender, EventArgs e)
+        private void ButtonStopWatch_Click(object sender, EventArgs e)
         {
             recoveryModeButton.Enabled = true;
             buttonChooseCurrentPath.Enabled = true;
@@ -74,7 +79,7 @@ namespace Epam.Task6.BackupSystem
             BackupManager.StopWatch();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void Button1_Click_1(object sender, EventArgs e)
         {
             DateTime date = dateTimePicker1.Value;
             DateTime time = dateTimePicker2.Value;
@@ -86,11 +91,6 @@ namespace Epam.Task6.BackupSystem
                 time.Minute, 
                 time.Second);
             BackupManager.RestoreFiles(dateTime);
-        }
-
-        private void buttonSaveRecoveryChanges_Click(object sender, EventArgs e)
-        {
-            BackupManager.SaveChanges();
         }
     }
 }

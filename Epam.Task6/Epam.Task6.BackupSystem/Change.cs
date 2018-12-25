@@ -12,13 +12,21 @@ namespace Epam.Task6.BackupSystem
         private DateTime dateTime;
         private string fullPath;
         private string previewFullPath;
-        private string content;
+<<<<<<< HEAD
+<<<<<<< HEAD
+        private string changedFilePath;
+        private string hash;
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 
         public Change(DateTime dateTime, ChangeType changeType, string fullPath)
         {
             this.dateTime = dateTime;
             this.changeType = changeType;
             this.fullPath = fullPath;
+            this.hash = Utils.GetHash(fullPath + dateTime);
         }
 
         public Change(DateTime dateTime, ChangeType changeType, string fullPath, string previewFullPath) 
@@ -34,11 +42,20 @@ namespace Epam.Task6.BackupSystem
         public ChangeType ChangeType { get => this.changeType; set => this.changeType = value; }
 
         public string PreviewFullPath { get => this.previewFullPath; set => this.previewFullPath = value; }
-        public string Content { get => content; set => content = value; }
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+        public string ChangedFilePath { get => this.changedFilePath; set => this.changedFilePath = value; }
+
+        public string Hash { get => this.hash; set => this.hash = value; }
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
 
         public override string ToString()
         {
-            string result = $"{DateTime.Now.ToString("yyyy.MM.dd HH:mm")}#{(int)ChangeType}#{fullPath}";
+            string result = $"{hash}#{DateTime.Now.ToString("yyyy.MM.dd HH:mm")}#{(int)ChangeType}#{fullPath}";
             switch (this.changeType)
             {
                 case ChangeType.Create:
@@ -49,7 +66,13 @@ namespace Epam.Task6.BackupSystem
                     result = string.Concat(result, $"#{PreviewFullPath}");
                     break;
                 case ChangeType.Change:
-                    result = string.Concat(result, $"#{Content}");
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    result = string.Concat(result, $"#{ChangedFilePath}");
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
+=======
+>>>>>>> parent of a705b46... Task6(ver2.1)
                     break;
             }
 
