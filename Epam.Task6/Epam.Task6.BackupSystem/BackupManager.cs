@@ -1,82 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-<<<<<<< HEAD
 using System.Linq;
-=======
->>>>>>> parent of e53564f... Task6(ver0.2)
-
 namespace Epam.Task6.BackupSystem
 {
     public static class BackupManager
     {
-<<<<<<< HEAD
         public const string BackupFileName = "backup.txt";
         public const string BackupFolderName = "backupFolder";
         private static DateTime lastBackupTime;
-        private static string backUpPath;
+        private static string backupPath;
+        private static string backupFolderPath;
         private static string currentPath;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        private static List<Change> changes = new List<Change>();
         private static Dictionary<string, List<InnerChange>> innerChanges = new Dictionary<string, List<InnerChange>>();
-
-        public static List<Change> Changes { get => changes; set => changes = value; }
-
         public static string BackupPath { get => backupPath; set => backupPath = value; }
-
-=======
-        public const string BackupFileName = "backup.txt";
         private static List<Change> changes = new List<Change>();
-        private static Thread watchThread;
 
         public static List<Change> Changes { get => changes; set => changes = value; }
-        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
->>>>>>> parent of a705b46... Task6(ver2.1)
-=======
-        public const string BackupFileName = "backup.txt";
-        private static List<Change> changes = new List<Change>();
-        private static Thread watchThread;
-
-        public static List<Change> Changes { get => changes; set => changes = value; }
-        public static string BackUpPath { get => backUpPath; set => backUpPath = value; }
->>>>>>> parent of a705b46... Task6(ver2.1)
         public static string CurrentPath
         {
             get => currentPath;
             set
             {
                 currentPath = value;
-<<<<<<< HEAD
-<<<<<<< HEAD
                 backupPath = Path.Combine(currentPath, BackupFileName);
                 backupFolderPath = Path.Combine(CurrentPath, BackupFolderName);
-=======
-                backUpPath = Path.Combine(currentPath, BackupManager.BackupFileName);
->>>>>>> parent of a705b46... Task6(ver2.1)
-=======
-                backUpPath = Path.Combine(currentPath, BackupManager.BackupFileName);
->>>>>>> parent of a705b46... Task6(ver2.1)
             }
         }
 
         public static DateTime LastBackupTime { get => lastBackupTime; set => lastBackupTime = value; }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         private static DateTime lastRestoreTime;
-        private static List<Change> changes = new List<Change>();
-
-        public static List<Change> Changes { get => changes; set => changes = value; }
->>>>>>> parent of e53564f... Task6(ver0.2)
 
         public static string BackupFolderPath { get => backupFolderPath; set => backupFolderPath = value; }
-=======
->>>>>>> parent of a705b46... Task6(ver2.1)
 
         public static Dictionary<string, List<InnerChange>> InnerChanges { get => innerChanges; set => innerChanges = value; }
-=======
->>>>>>> parent of a705b46... Task6(ver2.1)
 
         public static void InitBackUpManager()
         {
@@ -85,7 +42,6 @@ namespace Epam.Task6.BackupSystem
 
         public static void RestoreFiles(DateTime dateTime)
         {
-<<<<<<< HEAD
             bool toFuture = dateTime < lastBackupTime;
             var changesSet = toFuture
                 ?
@@ -130,78 +86,17 @@ namespace Epam.Task6.BackupSystem
                         break;
                 }
             }
-            /*foreach (var item in changesSet)
-            {   
-                index = Changes.IndexOf(item);
-                Change change = Changes[index];
-=======
-            foreach (var item in Changes)
-            {   
-                if (item.DateTime < dateTime)
-                {
-                    return;
-                }
-
->>>>>>> parent of e53564f... Task6(ver0.2)
-                switch (item.ChangeType)
-                {
-                    case ChangeType.Create:
-                        FileHelper.DeleteFile(item.FullPath);
-                        break;
-                    case ChangeType.Change:
-                        try
-                        {
-                            int indexInnerChanges = innerChanges[change.Hash].IndexOf(innerChanges[change.Hash].Find(x => x.DateTime == change.DateTime));
-                            if (indexInnerChanges - 1 > 0 || indexInnerChanges + 1 < innerChanges[change.Hash].Count)
-                            {
-                                indexInnerChanges += toFuture ? 1 : -1;
-                            }
-
-                            InnerChange innerChange = innerChanges[change.Hash][indexInnerChanges];
-                            FileHelper.CopyFile(innerChange.CurrentVerFilePath, change.FullPath);
-                        }
-                        catch (Exception)
-                        {
-                            throw;
-                        }
-
-                        break;
-                    case ChangeType.Rename:
-                        FileHelper.RenameFile(item.FullPath, item.PreviewFullPath);
-<<<<<<< HEAD
-                        change.ChangeType = ChangeType.Rename;
-                        var temp = Changes[index].FullPath;
-                        change.FullPath = Changes[index].PreviewFullPath;
-                        Changes[index].PreviewFullPath = temp;
-=======
->>>>>>> parent of e53564f... Task6(ver0.2)
-                        break;
-                    case ChangeType.Delete:
-                        FileHelper.CreateFile(item.FullPath);
-                        break;
-                }
-<<<<<<< HEAD
-<<<<<<< HEAD
-            }
-<<<<<<< HEAD
-
-=======
-            }*/
->>>>>>> parent of a705b46... Task6(ver2.1)
-=======
-            }*/
->>>>>>> parent of a705b46... Task6(ver2.1)
             LastBackupTime = dateTime;
+        }
+
+        internal static void StopWatch()
+        {
+            Watcher.Stop();
         }
 
         public static void Watch()
         {
             Watcher.Run();
-        }
-=======
->>>>>>> parent of e53564f... Task6(ver0.2)
-
-            lastRestoreTime = dateTime;
         }
 
         public static bool ParseChanges()
@@ -267,8 +162,6 @@ namespace Epam.Task6.BackupSystem
 
             return true;
         }
-<<<<<<< HEAD
-
         public static void AddInnerChange(string filename)
         {
             DateTime dateTime = DateTime.Now;
@@ -287,8 +180,6 @@ namespace Epam.Task6.BackupSystem
             int i = splited[0].LastIndexOf(@"\", splited[0].Length);
             return splited[0].Substring(0, i) + "\\" + splited[1];
         }
-    } 
-=======
     }
->>>>>>> parent of e53564f... Task6(ver0.2)
+
 }
