@@ -22,8 +22,7 @@ namespace Epam.Task6.BackupSystem
             try
             {
                 CreateFile(BackupManager.BackupPath);
-                CreateDirectory(BackupManager.BackupFolderPath);
-                ScanDirectory();
+                CreateChangeContentDependincies();
                 return true;
             }
             catch (Exception e)
@@ -31,11 +30,6 @@ namespace Epam.Task6.BackupSystem
                 Console.WriteLine(e.Message);
                 return false;
             }
-        }
-
-        private static void CreateDirectory(string path)
-        {
-            Directory.CreateDirectory(path);
         }
 
         public static void CreateFile(string filePath)
@@ -53,18 +47,23 @@ namespace Epam.Task6.BackupSystem
             File.Move(path, previewPath);
         }
 
-        public static void AppendToFile(Change change)
+        public static void AppendChangeToFile(Change change)
         {
-            using (StreamWriter writer = File.AppendText(BackupManager.BackupPath))
+            AppendToFile(BackupManager.BackupPath, change.ToString());
+        }
+
+        public static void AppendToFile(string path, string info)
+        {
+            try
             {
-                try
+                using (StreamWriter writer = File.AppendText(path))
                 {
-                    writer.WriteLine(change.ToString());
+                    writer.WriteLine(info);
                 }
-                catch (IOException e)
-                {
-                    Console.WriteLine($"Backup file write error. {e.Message}");
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"File write error. {e.Message}");
             }
         }
 
@@ -93,11 +92,11 @@ namespace Epam.Task6.BackupSystem
             }
         }
 
-        public static void OpenReaderStream()
+        public static void OpenReaderStream(string path)
         {
             if (streamReader == null)
             {
-                streamReader = new StreamReader(BackupManager.BackupPath);
+                streamReader = new StreamReader(path);
             }
         }
 
@@ -109,48 +108,50 @@ namespace Epam.Task6.BackupSystem
             }
         }
 
+        public static string GenerateDateTimeFileName(string file, DateTime dateTime)
+        {
+            string filename = $"{BackupManager.BackupFolderName}\\{dateTime.ToFileTime()}#{Path.GetFileName(file)}";
+            return Path.Combine(Path.GetDirectoryName(file), filename);
+        }
+
+        public static void CopyFile(string from, string to)
+        {
+            try
+            {
+                File.Copy(from, to, true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         private static void ScanDirectory()
         {
-            var rootDir = Data.RootDirectory;
-            GetSubdirectories(ref rootDir);
-            /*string[] directories = Directory.GetDirectories(BackupManager.CurrentPath);
-            foreach (string directory in directories)
-            {
-                Data.Directories[index].AddDirectory(directory);
-            }
+            ClearFolder(BackupManager.BackupFolderPath);
             foreach (var file in Directory.EnumerateFiles(BackupManager.CurrentPath, "*.txt", SearchOption.AllDirectories))
             {
-                if(IsBackUpFile(file))
+                if (IsBackUpFile(file) || Path.GetDirectoryName(file) == BackupManager.BackupFolderPath)
                 {
                     continue;
                 }
-                Change change = new Change(DateTime.Now, ChangeType.Change, file);
-                AppendToFile(change);
-            }*/
-        }
 
-        private static void GetSubdirectories(ref MyDirectory myDirectory)
-        {
-            string[] directories = Directory.GetDirectories(myDirectory.Path);
-
-            foreach (string directory in directories)
-            {
-                myDirectory.AddDirectory(directory);
-                var dir = myDirectory.Directories[myDirectory.Directories.Keys.Max()] as MyDirectory;
-                GetSubdirectories(ref dir);
-                GetFiles(ref dir);
+                BackupManager.AddInnerChange(file);
             }
         }
 
-        private static void GetFiles(ref MyDirectory myDirectory)
+        private static void CreateChangeContentDependincies()
         {
-            foreach (var file in Directory.EnumerateFiles(myDirectory.Path, "*.txt", SearchOption.TopDirectoryOnly))
+            Directory.CreateDirectory(BackupManager.BackupFolderPath);
+            ScanDirectory();
+        }
+
+        private static void ClearFolder(string path)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+            foreach (FileInfo file in dirInfo.GetFiles())
             {
-                if (IsBackUpFile(file))
-                {
-                    continue;
-                }
-                myDirectory.AddFile(file, GetFileContent(file));
+                file.Delete();
             }
         }
 

@@ -4,18 +4,17 @@ using System.Security.Permissions;
 
 namespace Epam.Task6.BackupSystem
 {
-    class Watcher
+    public class Watcher
     {
         private static int changesCounter = 0;
-        private static  FileSystemWatcher watcher;
-       [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        private static FileSystemWatcher watcher;
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public static void Run()
         {
             watcher = new FileSystemWatcher();
             watcher.IncludeSubdirectories = true;
             watcher.Path = BackupManager.CurrentPath;
-            watcher.NotifyFilter = NotifyFilters.LastWrite
-               | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             watcher.Filter = "*.txt";
 
             watcher.Changed += new FileSystemEventHandler(OnChanged);
@@ -29,10 +28,16 @@ namespace Epam.Task6.BackupSystem
 
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
-            if (!FileHelper.IsBackUpFile(e.FullPath))
+            if (!FileHelper.IsBackUpFile(e.FullPath) && Path.GetDirectoryName(e.FullPath)
+                != BackupManager.BackupFolderPath)
             {
-                UpdateChangesCounter();
-                FileHelper.AppendToFile(new Change(DateTime.Now, (ChangeType)(int)e.ChangeType, e.FullPath));
+                Change change = new Change(DateTime.Now, (ChangeType)(int)e.ChangeType, e.FullPath);
+                if (change.ChangeType == ChangeType.Change)
+                {
+                    BackupManager.AddInnerChange(e.FullPath);
+                }
+
+                FileHelper.AppendChangeToFile(change);
             }
         }
 
@@ -40,15 +45,8 @@ namespace Epam.Task6.BackupSystem
         {
             if (!FileHelper.IsBackUpFile(e.FullPath))
             {
-                UpdateChangesCounter();
-                FileHelper.AppendToFile(new Change(DateTime.Now, (ChangeType)(int)e.ChangeType, e.FullPath, e.OldFullPath));
+                FileHelper.AppendChangeToFile(new Change(DateTime.Now, (ChangeType)(int)e.ChangeType, e.FullPath, e.OldFullPath));
             }
-        }
-
-        private static void UpdateChangesCounter()
-        {
-            changesCounter++;
-            Console.Write($"\rChanges:{changesCounter}");
         }
 
         internal static void Stop()
