@@ -14,7 +14,7 @@ namespace Epam.Task8.HtmlReplacer
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("The application demonstrates working of regular expession for html tags replacing");
+            Console.WriteLine("The application demonstrates working of regular expression for html tags replacing");
             Console.WriteLine("Input string:");
             string inputString = Console.ReadLine();
             string resultString = ReplaceHtmlTags(inputString);

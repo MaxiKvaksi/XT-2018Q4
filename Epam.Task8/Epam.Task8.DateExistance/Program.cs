@@ -13,7 +13,7 @@ namespace Epam.Task8.DateExistance
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("The application demonstrates working of regular expession for date searching in string");
+            Console.WriteLine("The application demonstrates working of regular expression for date searching in string");
             Console.WriteLine("Input string:");
             string inputString = Console.ReadLine();
             bool dateContains = DateContains(inputString);
