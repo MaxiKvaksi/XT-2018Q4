@@ -1,0 +1,14 @@
+ul {
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
+}
+.menu
+{
+    width: 200px;
+    background-color: wheat;
+    border: 0.1em solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px brown;
+    color: brown;
+}

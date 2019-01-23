@@ -1,0 +1,20 @@
+body
+{
+    background-color:white; 
+}
+
+.article_title
+{
+  background-color: lightseagreen;
+  padding: 10px;
+  color: aliceblue;
+  font-size: 1.2em;
+}
+
+.article
+{
+  background-color: gainsboro;
+  padding: 10px;
+  margin-left: 20px;
+  margin-top: -10px;
+}

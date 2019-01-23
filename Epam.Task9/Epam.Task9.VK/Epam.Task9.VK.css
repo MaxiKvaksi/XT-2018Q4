@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+html, body
+{
+  font-family: 'Roboto', sans-serif;
+  font-size: 12.5px;
+}
+
+.border
+{
+  border: 0px solid black;
+}
+
+body
+{
+  background-color: #E7EAED;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  position: absolute;
+}
+
+.header
+{
+  position: fixed;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #597da3;
+  height: 6%;
+  z-index: 5;
+}
+
+.main
+{
+  margin: 0 auto;   
+  box-sizing: content-box;
+  background-color: transparent;
+  width: 960px;
+}
+
+.footer
+{
+  clear: both;
+  height: 10px;
+}
+
+.side_bar
+{
+  vertical-align: top;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 150px;
+  height: 50%; 
+  margin-top: 6%;
+}
+
+.page_body
+{
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-top: 6%;
+  background-color: transparent;
+  width: 795px;
+}
+
+.content
+{
+  vertical-align: top;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: #F1F1F1;
+  height: 760;
+  width: 550px;
+  margin-right: 20px;
+}
+
+.right_column
+{
+  position: fixed;
+  vertical-align: top;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: #F1F1F1;
+  width: 230px;
+  padding: 5px 0px;
+}
+
+.right_column-item
+{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 32px;
+  line-height: 31px;
+  padding: 0 5px 0 20px;
+  color: #2a5885;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.right_column-item-selected
+{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 32px;
+  line-height: 31px;
+  padding: 0 5px 0 20px;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+  color: #000;
+  border-left: 2px solid #5181b8;
+}
+
+.right_column-item:hover
+{
+  color: #000;
+  border-left: 2px solid #5181b8;
+}
+
+.side_bar_label
+{
+  box-sizing: border-box;
+  height: 32px;
+  width: 122px;
+  background-color: transparent;
+  border-radius: 2px;
+  line-height: 27px;
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  padding: 5px 0px;
+}
+
+.side_bar_label:hover
+{
+  background-color: #D9E0E7;
+}
+
+.side_bar_label-delimitier
+{
+  margin-right: 6px;
+  padding-top: 9px;
+  border-top: 1px solid #dfe2e8;
+}
+
+.side_bar_label_icon
+{
+
+  display: inline-block;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  margin-top:0px;
+}
+
+.side_bar_label_text
+{
+  vertical-align: top;
+  line-height: 27px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 89px;
+  height: 28px;
+  margin-top: -4px;
+  padding-left: 5px;
+  color: #2a5885;
+  font-weight: bold;
+}
+
+.settings-title
+{
+  margin-left: 20px;
+  font-size: large;
+}
+
+.settings_main
+{
+  margin: 10px 20px;
+}
+a
+{
+  text-decoration: none;
+}
+.settings_line
+{
+  margin: 0;
+  padding: 15px 0 14px;
+  border-bottom: 1px solid #e7e8ec;
+  
+}
+
+ul
+{
+  list-style-type: none;
+}
+.settings_line-label
+{
+  color: #656565;
+  width: 145px;
+  padding: 6px 10px 6px 0;
+  float: left;
+  line-height: 16px;
+}
+
+.settings_line-content
+{
+  padding-top: 6px;
+  margin: 0 0 8px 155px;
+}
+
+.setting_line-change
+{
+  display: inline;
+  padding-top: 6px;
+  float: right;
+  margin: 0 0 8px 100px;
+}
+
+.logo
+{
+  display: inline-block;
+  background: url(https://vk.com/images/svg_icons/ic_head_logo.svg) no-repeat 50% / contain;
+  height: 19px;
+  width: 34px;
+  margin: 13px 10px 0 0;
+  cursor: pointer;
+}
+
+.search
+{
+  display: inline-block;
+  vertical-align: top;
+  height: 5%;
+  margin: 17px 0 0 110px;
+  cursor: pointer;
+}
+
+.search input {
+  width: 250px;
+  height: 32px;
+  background: rgb(34, 75, 122);
+  border-radius: 20px;
+  margin-top: -10px;
+  text-indent: 32px;
+}
+
+.search .fa-search { 
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+
+.notification
+{
+  display: inline-block;
+  vertical-align: top;
+  background: url(images/ic_head_notify.png) no-repeat 50% / contain;
+  height: 25px;
+  width: 34px;
+  margin: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.player
+{
+  display: inline-block;
+  vertical-align: top;
+  background: url(images/Player.JPG) no-repeat;
+  background-size: cover;
+  height: 46px;
+  width: 330px;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+}
+
+.userblock
+{
+  display: inline-block;
+  vertical-align: top;
+  background-color: #5181b8;
+  height: 46px;
+  width: 120px;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+}
+
+.header-content
+{
+  width: 960px;
+  position: relative;
+  height: 42px;
+  margin: 0 auto;
+  font-size: 12.5px;
+  padding: 0 15px;
+}
+
+.delete_line
+{
+  margin: 0;
+  text-align: center;
+  padding: 15px 0 14px;
+  border-bottom: 1px solid #e7e8ec;
+}
+
+
+

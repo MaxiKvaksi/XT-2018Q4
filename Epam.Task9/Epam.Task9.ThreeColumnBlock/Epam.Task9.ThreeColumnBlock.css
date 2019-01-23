@@ -1,0 +1,126 @@
+body
+{
+    background-color:lightsteelblue; 
+}
+
+.main_block {
+    box-sizing: border-box;
+    position: absolute;
+    left: 30pt;
+    right: 40pt;
+    text-align: center;
+    border-radius: 5px;
+    align-content: center;
+    height: 200px;
+    background-color: aliceblue;
+    box-shadow: 0 40px 40px rgba(0,0,0,0.3);
+  }
+
+  .feature
+  {
+    display: inline-block;
+    width: 32%;
+    height: 100%;   
+  }
+
+  .delimitier
+  {
+    display: inline-block;  
+    background-color: gray;
+    margin-bottom: -5pt; 
+    height: 70%;
+    width: 1px;
+  }
+
+  .service_name
+  {
+    color: orangered;
+    font-weight: bold;
+    margin-top: 75pt;
+    margin-bottom: 5pt;
+  }
+
+  .service_cost
+  {
+        
+  }
+
+  .service_more_button
+  {
+    margin: 10pt auto;
+    width: 50%;
+    height: 15pt;
+    color: white;
+    background-color: orangered;
+    border-radius: 3px;
+    align-content: center;
+  }
+
+  .service_more_button:hover
+  {
+    background-color: rgb(163, 67, 33);
+    cursor: pointer;
+  }
+
+  .virt_host {
+    position: absolute;
+    left: 11%;
+    top: 8px;
+    width: 100px;
+    height: 73px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .virt_host::after {
+    content: " ";
+    position: absolute;
+    background-image: url("map.JPG");
+    left: 0;
+    top: 8px;
+    width: 100px;
+    height: 73px;
+    z-index: 2;
+  }
+
+  .cloud_host {
+    position: absolute;
+    left: 45%;
+    top: 20px;
+    width: 100px;
+    height: 60px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .cloud_host::after {
+    content: " ";
+    position: absolute;
+    background-image: url("map.JPG");
+    left: 0;
+    top: -66px;
+    width: 90px;
+    height: 189px;
+    z-index: 2;
+  }
+
+  .alloted_serv {
+    position: absolute;
+    left: 76%;
+    top: 22px;
+    width: 100px;
+    height: 60px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .alloted_serv::after {
+    content: " ";
+    position: absolute;
+    background-image: url("map.JPG");
+    left: 0;
+    top: -128px;
+    width: 90px;
+    height: 189px;
+    z-index: 2;
+  }

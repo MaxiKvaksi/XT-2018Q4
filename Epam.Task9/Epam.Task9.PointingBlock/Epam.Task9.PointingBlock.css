@@ -1,0 +1,53 @@
+body
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: #464547;
+}
+
+.pointing_block {
+    box-sizing: border-box;
+    position: absolute;
+    padding: 0px 20px;
+    left: 20px;
+    right: 20px;
+    top: 40px;
+    text-align: center;
+    height: 5em;
+    color: white;
+    background-color: lightskyblue;
+    border: 3px solid lightblue;
+    font-size: 9pt;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  .centered
+  {
+    line-height: 4.5em;
+    vertical-align: middle;
+  }
+
+  .virt_host {
+    width: 70px;
+    height: 20px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    top: -20px;
+    z-index: 1;
+  }
+
+  .point::after {
+    content: " ";
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    background-image: url("map.jpg");
+    width: 25px;
+    height: 25px;
+    z-index: 2;
+  }

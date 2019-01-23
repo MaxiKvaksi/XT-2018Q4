@@ -1,0 +1,35 @@
+body {
+	background: black;
+  margin: 30px;
+}
+
+.article_title {
+	color: #ffb163;
+	font: bold 1.8em Arial;
+	background: black;
+	width: 100px;
+	padding: 4px;
+	margin: -10px;
+}
+.content
+{
+  margin: 15px;
+}
+
+.article {
+	background: linear-gradient(to top, #e0e0e0, #fefefe);
+	width: 400px;
+	padding: 10px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.article_title::after {
+  position: absolute;
+  top: 30px;
+  left: 131px;
+  content: '';
+  border: 15px solid #000;
+  border-bottom: 26px solid #fafafa;
+  border-right: 9px solid #fafafa;
+}
