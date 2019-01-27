@@ -1,0 +1,36 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="script.js"></script>
+    <title>SimpleGallery.Page1</title>
+    <style>
+        .container
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Страница 2</h1>
+        <img src="images/image2.jpg" width="150" height="120">
+        <form id="main_form">
+            <input type="button" value="Preview page" id="previewPageButton" onclick="previewPage();";>
+            <input type="button" value="Start" id="startTimerButton" onclick="startTimer();";>
+            <input type="button" value="Stop" id="stopTimerButton" onclick="stopTimer();";>
+            <input type="button" value="Next page" id="nextPageButton" onclick="nextPage();";>
+        </form>
+        <h3>
+            Timer:
+            <div id="timer">5</div>
+        </h3>
+    </div>
+    <script>
+        window.onload = function() {
+            ShowNextByTimeout();
+        };
+    </script>
+</body>
+</html>
