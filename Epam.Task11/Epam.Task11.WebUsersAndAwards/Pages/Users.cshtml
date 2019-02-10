@@ -1,0 +1,202 @@
+﻿@using Epam.Task7.BLL.Interface;
+@using Epam.Task7.Common;
+@using Epam.Task7.Entities;
+@using Epam.Task7.Entities.Exceptions;
+@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Users";
+    var userLogic = DependencyResolver.UserLogic;
+    var awardLogic = DependencyResolver.AwardLogic;
+    var awardedUsersLogic = DependencyResolver.AwardedUsersLogic;
+}
+
+@if (IsAjax)
+{
+    switch (Request.Params["func"])
+    {
+        case "userDel":
+            userLogic.Delete(int.Parse(Request.Params["idUser"]));
+            break;
+        case "userUpdate":
+            int userId = int.Parse(Request.Params["idUser"]);
+            DateTime dateTimeU;
+            if (!DateTime.TryParse(Request.Params["dobUser"], out dateTimeU))
+            {
+                break;
+            }
+            var userU = new User
+            {
+                Id = userId,
+                Name = Request.Params["nameUser"] != ""
+                ?Request.Params["nameUser"]
+                :userLogic.GetById(userId).Name,
+                DateOfBirth = dateTimeU,
+                ImageId = userLogic.GetById(userId).ImageId,
+            };
+            userLogic.Update(userU);
+            break;
+        case "userCreate":
+            DateTime dateTimeC;
+            if (!DateTime.TryParse(Request.Params["dobUser"], out dateTimeC))
+            {
+                break;
+            }
+            var userC = new User
+            {
+                Name = Request.Params["nameUser"],
+                DateOfBirth = dateTimeC,
+                ImageId = 1,
+            };
+            userLogic.Add(userC);
+            break;
+        case "awardAdd":
+            awardedUsersLogic.Add(int.Parse(Request.Params["idUser"]), int.Parse(Request.Params["idAward"]));
+            break;
+        case "awardRemove":
+            awardedUsersLogic.Delete(int.Parse(Request.Params["idUser"]), int.Parse(Request.Params["idAward"]));
+            break;
+    }
+}
+<h1>Users</h1>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+
+function addAwardToUser(idUser) {
+    event.preventDefault();
+    var idAward = $("#selaward_" + idUser).val();
+    $.ajax({
+        method: "POST",
+        url: "/Pages/Users",
+       data: {
+           func: "awardAdd", idUser:idUser, idAward: idAward,
+       },
+         success: function () { location.reload();},
+         failure: function (errMsg) {
+            alert(errMsg);
+       },
+      });
+    }
+
+    function removeAwardFromUser(idUser, idAward) {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/Pages/Users",
+            data: {
+                func: "awardRemove", idUser: idUser, idAward: idAward,
+            },
+            success: function () { location.reload(); },
+            failure: function (errMsg) {
+                alert(errMsg);
+            },
+        });
+    }
+
+function createUser() {
+        event.preventDefault();
+        $.ajax({
+        method: "POST",
+            url: "/Pages/Users",
+            data: {
+            func: "userCreate", nameUser: $('#namenewusr').val(),
+                dobUser: $('#dobnewusr').val(),
+            },
+            success: function () { location.reload();},
+            failure: function (errMsg) {
+            alert(errMsg);
+        },
+        });
+}
+
+    function removeUser(idUserValue) {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/Pages/Users",
+            data: { func: "userDel", idUser: idUserValue },
+            success: function () {location.reload();},
+            failure: function (errMsg) {
+                alert(errMsg);
+            },
+        });
+    }
+
+    function updateUser(idUserValue) {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/Pages/Users",
+            data: {
+                func: "userUpdate", idUser: idUserValue, nameUser: $('#nameusr_' + idUserValue).val(),
+                dobUser: $('#dobusr_' + idUserValue).val(),
+            },
+            success: function () {location.reload()},
+            failure: function (errMsg) {
+                alert(errMsg);
+            },
+        });
+    }
+</script>
+
+
+
+<form method="post" action="~/Pages/Users.cshtml" id="user_form">
+    @{
+        var array = userLogic.GetAll();
+    }
+    <div>
+        Name: <input type="text" value="" id="namenewusr" size="5" />
+        Date of birth : <input type="date" value="" id="dobnewusr" size="6" />
+        <input type="button" value="Create user" id="1_button_'+ elementsCount +'" onclick="createUser()">
+    </div>
+    <div id="data">
+      <ul name="users_list" id="users" style="width: 550px; list-style-type:none; background-color: slategray; color: azure; ">
+            @{
+                var arrayAwards = @awardLogic.GetAll();
+            }
+            @foreach (var user in @array)
+            {
+                <li id="item_@user.Id" style="border:solid 1px black;">
+                    Name(@user.Name): <input type="text" value="" id="nameusr_@user.Id" size="5" />
+                    Date of birth @String.Format("{0:M/d/yyyy}", @user.DateOfBirth): <input type="date" value="" id="dobusr_@user.Id" size="6" />
+                    Age: @user.Age
+                    @if (User.IsInRole("admins") && user.Name != "admin")
+                    {
+                    <input type="button" value="Update" id="updbtnusr_@user.Id" onclick="updateUser(@user.Id)" />
+                    <input type="button" value="Delete" id="delbtnusr_@user.Id" onclick="removeUser(@user.Id)" />
+
+                    <select id="selaward_@user.Id">
+                        @foreach (var award in @arrayAwards)
+                        {
+                            <option value="@award.Id">@award.Title</option>
+                        }
+                    </select>
+                    <input type="button" value="AddAward" id="addawdbtn_@user.Id" onclick="addAwardToUser(@user.Id)" />
+                    }
+                    <br />
+                    @if (User.IsInRole("users"))
+                    {
+                        var awards = awardedUsersLogic.GetAwardsByUserId(@user.Id, awardLogic.GetAll());
+                        @:Awards
+                    <ul style="background-color: cornflowerblue;">
+                        @foreach (var award in awards)
+                        {
+                            <li id="item_@award.Id">
+                                @award
+                                @if (User.IsInRole("admins") && user.Name != "admin")
+                                {
+                                <input type="button" value="Delete" id="delawdbtnusr_@user.Id"
+                                       onclick="removeAwardFromUser(@user.Id, @award.Id)"/>
+                                }
+                            </li>
+                        }
+                    </ul>}
+                </li>
+             }
+        </ul>
+    </div>
+</form>
+

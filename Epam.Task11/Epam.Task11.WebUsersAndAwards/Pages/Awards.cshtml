@@ -1,0 +1,126 @@
+﻿@using Epam.Task7.BLL.Interface;
+@using Epam.Task7.Common;
+@using Epam.Task7.Entities;
+@using Epam.Task7.Entities.Exceptions;
+@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Awards";
+    var userLogic = DependencyResolver.UserLogic;
+    var awardLogic = DependencyResolver.AwardLogic;
+    var awardedUsersLogic = DependencyResolver.AwardedUsersLogic;
+}
+
+@if (IsAjax)
+{
+    switch (Request.Params["func"])
+    {
+        case "awardDel":
+            var idAward = int.Parse(Request.Params["idAward"]);
+            if (awardedUsersLogic.AwardConnected(idAward))
+            {
+                Response.Write("AwardConnected");
+                HttpContext.Current.Response.Flush();
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                HttpContext.Current.Response.SuppressContent = true;
+            }
+            else
+            {
+                awardLogic.Delete(int.Parse(Request.Params["idAward"]));
+            }
+            break;
+        case "awardConnectedDel":
+            var idConAward = int.Parse(Request.Params["idAward"]);
+            awardLogic.Delete(int.Parse(Request.Params["idAward"]));
+            var awardedUsers = awardedUsersLogic.GetAll();
+            for (int i = 0; i < awardedUsers.Count(); i++)
+            {
+                awardedUsersLogic.DeleteByIdAward(idConAward);
+            }
+            break;
+        case "awardCreate":
+            var awardC = new Award
+            {
+                Title = Request.Params["nameAward"],
+                IdImage = 1,
+            };
+            awardLogic.Add(awardC);
+            break;
+    }
+}
+
+<h1>Users</h1>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+    function createAward() {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/Pages/Awards",
+            data: {
+                func: "awardCreate", nameAward: $('#namenewawd').val(),
+            },
+            success: function () { location.reload(); },
+            failure: function (errMsg) {
+                alert(errMsg);
+            },
+        });
+    }
+
+    function removeAward(idAwardValue) {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/Pages/Awards",
+            data: { func: "awardDel", idAward: idAwardValue },
+            success: function (data) {
+                if (data == "AwardConnected") {
+                    if (confirm("Award connected with users. Do you want delete award from users?")) {
+                        $.ajax({
+                            method: "POST",
+                            url: "/Pages/Awards",
+                            data: {
+                                func: "awardConnectedDel", idAward: idAwardValue,
+                            },
+                            success: function () { location.reload(); },
+                            failure: function (errMsg) {
+                                alert(errMsg);
+                            },
+                        });
+                    }
+                }
+                else {
+                    location.reload();
+                }
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            },
+        });
+    }
+</script>
+
+
+
+<form method="post" action="~/Pages/Users.cshtml" id="user_form">
+    @{
+        var array = @awardLogic.GetAll();
+    }
+    <div>
+        Award name: <input type="text" value="" id="namenewawd" size="5" />
+        <input type="button" value="Create award" id="1_button_'+ elementsCount +'" onclick="createAward()">
+    </div>
+    <ul name="users_list" id="users" style="width: 550px; list-style-type:none; background-color: slategray; color: azure; ">
+        @foreach (var award in @array)
+        {
+            <li id="item_@award.Id" style="border:solid 1px black;">
+                Name(@award.Title): <input type="text" value="" id="nameusr_@award.Id" size="5" />
+                <input type="button" value="Delete" id="delbtnusr_@award.Id" onclick="removeAward(@award.Id)" />
+                <br />
+            </li>
+        }
+    </ul>
+</form>
+

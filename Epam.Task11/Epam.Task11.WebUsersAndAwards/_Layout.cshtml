@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <a href="~/index">Main</a>
+    <a href="~/Pages/Awards">Awards</a>
+    <a href="~/Pages/Users">Users</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>User name: @User.Identity.Name</p>
+        <a href="~/Logout.cshtml">Logout</a>
+    }
+    else
+    {
+        <a href="~/Login.cshtml">Login</a>
+    }
+    @RenderBody()
+    @RenderSection("~/Scripts/Scripts.cshtml", required: false)
+</body>
+</html>

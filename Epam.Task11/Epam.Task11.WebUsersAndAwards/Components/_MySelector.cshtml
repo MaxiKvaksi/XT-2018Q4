@@ -1,0 +1,14 @@
+﻿@{
+    var array = Model.array;
+    var selector_id = Model.selector_id;
+    var count = 0;
+    var subSelector = Model.subresource != null;
+}
+<ul name="users_list" id=@selector_id style="width: 350px; list-style-type:none;">
+    @foreach (var item in @array)
+    {
+        <li id="item_@selector_id@count">@item <input type="submit" value="Update" id="@count"/>
+        <input type="submit" value="Delete" id="@count" /></li> 
+        count += 1;
+    }
+</ul>
