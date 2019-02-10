@@ -8,6 +8,7 @@
     var userLogic = DependencyResolver.UserLogic;
     var awardLogic = DependencyResolver.AwardLogic;
     var awardedUsersLogic = DependencyResolver.AwardedUsersLogic;
+    var imagesLogic = DependencyResolver.ImageLogic;
 }
 
 @if (IsAjax)
@@ -153,13 +154,14 @@ function createUser() {
         <input type="button" value="Create user" id="1_button_'+ elementsCount +'" onclick="createUser()">
     </div>
     <div id="data">
-      <ul name="users_list" id="users" style="width: 550px; list-style-type:none; background-color: slategray; color: azure; ">
+      <ul name="users_list" id="users" style="width: 650px; list-style-type:none; background-color: slategray; color: azure; ">
             @{
                 var arrayAwards = @awardLogic.GetAll();
             }
             @foreach (var user in @array)
             {
-                <li id="item_@user.Id" style="border:solid 1px black;">
+                <li id="item_@user.Id" style="border:solid 1px black;" >
+                    <img src="@imagesLogic.GetById(user.ImageId)" alt="user icon" width="40"/>
                     Name(@user.Name): <input type="text" value="" id="nameusr_@user.Id" size="5" />
                     Date of birth @String.Format("{0:M/d/yyyy}", @user.DateOfBirth): <input type="date" value="" id="dobusr_@user.Id" size="6" />
                     Age: @user.Age

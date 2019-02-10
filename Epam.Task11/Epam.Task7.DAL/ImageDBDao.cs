@@ -64,7 +64,7 @@ namespace Epam.Task7.DAL
                         new Image
                         {
                             Id = (int)reader["id"],
-                            Value = (string)reader["image"],
+                            Value = (string)reader["image_value"],
                         });
                 }
             }
@@ -73,7 +73,7 @@ namespace Epam.Task7.DAL
 
         public Image GetById(int id)
         {
-            throw new NotImplementedException();
+            return (Image)GetAll().Where(k => k.Id == id).ToList()[0];
         }
     }
 }

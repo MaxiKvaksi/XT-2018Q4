@@ -17,7 +17,7 @@ namespace Epam.Task7.Entities
 
         public override string ToString()
         {
-            return $"{id}: {this.value}";
+            return this.value;
         }
     }
 }

@@ -8,6 +8,7 @@
     var userLogic = DependencyResolver.UserLogic;
     var awardLogic = DependencyResolver.AwardLogic;
     var awardedUsersLogic = DependencyResolver.AwardedUsersLogic;
+    var imagesLogic = DependencyResolver.ImageLogic;
 }
 
 @if (IsAjax)
@@ -41,7 +42,7 @@
             var awardC = new Award
             {
                 Title = Request.Params["nameAward"],
-                IdImage = 1,
+                IdImage = 2,
             };
             awardLogic.Add(awardC);
             break;
@@ -115,11 +116,12 @@
     <ul name="users_list" id="users" style="width: 550px; list-style-type:none; background-color: slategray; color: azure; ">
         @foreach (var award in @array)
         {
-            <li id="item_@award.Id" style="border:solid 1px black;">
-                Name(@award.Title): <input type="text" value="" id="nameusr_@award.Id" size="5" />
-                <input type="button" value="Delete" id="delbtnusr_@award.Id" onclick="removeAward(@award.Id)" />
-                <br />
-            </li>
+        <li id="item_@award.Id" style="border:solid 1px black;">
+            <img src="@imagesLogic.GetById(award.IdImage)" alt="user icon" width="40" />
+            Name(@award.Title): <input type="text" value="" id="nameusr_@award.Id" size="5" />
+            <input type="button" value="Delete" id="delbtnusr_@award.Id" onclick="removeAward(@award.Id)" />
+            <br />
+        </li>
         }
     </ul>
 </form>

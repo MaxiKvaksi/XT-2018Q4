@@ -16,8 +16,12 @@ namespace Epam.Task7.Common
         private static IAwardedUsersDao awardedUsersDao;
         private static IAwardedUsersLogic awardedUsersLogic;
         private static ICacheLogic cacheLogic;
+        private static IImageDao imageDao;
+        private static IImageLogic imageLogic;
 
         public static IUserLogic UserLogic => userLogic ?? (userLogic = new UserLogic(UserDao, CacheLogic));
+
+        public static IImageLogic ImageLogic => imageLogic ?? (imageLogic = new ImageLogic(ImageDao, CacheLogic));
 
         public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
 
@@ -119,6 +123,37 @@ namespace Epam.Task7.Common
                 }
 
                 return awardedUsersDao;
+            }
+        }
+
+        public static IImageDao ImageDao
+        {
+            get
+            {
+                var key = ConfigurationManager.AppSettings["DaoDataKey"];
+
+                if (imageDao == null)
+                {
+                    switch (key)
+                    {
+                        case "db":
+                            {
+                                imageDao = new ImageDBDao();
+                                break;
+                            }
+
+                        case "file":
+                            {
+                                imageDao = new ImageDBDao();
+                                break;
+                            }
+
+                        default:
+                            throw new Exception("Invalid app data source configuration");
+                    }
+                }
+
+                return imageDao;
             }
         }
     }
