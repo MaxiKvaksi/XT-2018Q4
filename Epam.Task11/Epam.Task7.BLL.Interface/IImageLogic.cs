@@ -9,7 +9,7 @@ namespace Epam.Task7.BLL.Interface
 {
     public interface IImageLogic
     {
-        void Add(Image image);
+        int Add(Image image);
 
         void Delete(int id);
 

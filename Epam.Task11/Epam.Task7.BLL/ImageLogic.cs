@@ -21,7 +21,7 @@ namespace Epam.Task7.BLL
             this.cacheLogic = cacheLogic;
         }
 
-        public void Add(Image image)
+        public int Add(Image image)
         {
             try
             {
@@ -30,8 +30,9 @@ namespace Epam.Task7.BLL
                     throw new NullReferenceException("User is null");
                 }
 
-                this.imagesDao.Add(image);
+                int id = this.imagesDao.Add(image);
                 this.cacheLogic.Delete(ALL_IMAGES_CACHE_KEY);
+                return id;
             }
             catch
             {

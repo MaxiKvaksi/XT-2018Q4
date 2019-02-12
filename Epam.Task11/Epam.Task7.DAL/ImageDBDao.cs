@@ -19,8 +19,9 @@ namespace Epam.Task7.DAL
             _connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
         }
 
-        public void Add(Image image)
+        public int Add(Image image)
         {
+            int id = 1;
             using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
             {
                 var command = sqlConnection.CreateCommand();
@@ -30,7 +31,18 @@ namespace Epam.Task7.DAL
                 command.Parameters.Add(parDOB);
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
+
+                var commandGetId = sqlConnection.CreateCommand();
+                commandGetId.CommandText = "GetImageId";
+                commandGetId.CommandType = System.Data.CommandType.StoredProcedure;
+                var reader = commandGetId.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id = (int)reader["id"];
+                }
             }
+            return id;
         }
 
         public void Delete(int id)
@@ -61,11 +73,7 @@ namespace Epam.Task7.DAL
                 while (reader.Read())
                 {
                     images.Add(
-                        new Image
-                        {
-                            Id = (int)reader["id"],
-                            Value = (string)reader["image_value"],
-                        });
+                        new Image((int)reader["id"], (string)reader["image_value"]));
                 }
             }
             return images;

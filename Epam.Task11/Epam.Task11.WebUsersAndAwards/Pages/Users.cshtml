@@ -25,6 +25,7 @@
             {
                 break;
             }
+            var userName = Request.Params["nameUser"];
             var userU = new User
             {
                 Id = userId,
@@ -56,6 +57,18 @@
         case "awardRemove":
             awardedUsersLogic.Delete(int.Parse(Request.Params["idUser"]), int.Parse(Request.Params["idAward"]));
             break;
+        case "userUpdateImage":
+            int userIdUI = int.Parse(Request.Params["idUser"]);
+            int imageId = imagesLogic.Add(new Image(1,Request.Params["img"]));
+            var userUI = new User
+            {
+                Id = userIdUI,
+                Name = userLogic.GetById(userIdUI).Name,
+                DateOfBirth = userLogic.GetById(userIdUI).DateOfBirth,
+                ImageId = imageId,
+            };
+            userLogic.Update(userUI);
+            break;
     }
 }
 <h1>Users</h1>
@@ -72,12 +85,12 @@ function addAwardToUser(idUser) {
         method: "POST",
         url: "/Pages/Users",
        data: {
-           func: "awardAdd", idUser:idUser, idAward: idAward,
+            func: "awardAdd", idUser:idUser, idAward: idAward,
        },
          success: function () { location.reload();},
          failure: function (errMsg) {
             alert(errMsg);
-       },
+        },
       });
     }
 
@@ -140,6 +153,38 @@ function createUser() {
             },
         });
     }
+
+    function updateIcon(idUser) {
+        getImageToUser(idUser);
+    }
+
+    function updateDataImage(img, userId)
+    {
+        $.ajax({
+            method: "POST",
+            url: "/Pages/Users",
+            data: {
+                func: "userUpdateImage", idUser: userId, img: img
+            },
+            success: function () { location.reload() },
+            failure: function (errMsg) {
+                alert(errMsg);
+            },
+        });
+    }
+    var reader = new FileReader();
+    function getImageToUser(userId) {
+        var preview = document.querySelector('#icon_' + userId);
+        var file = document.querySelector('#file_' + userId).files[0];
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+            updateDataImage(preview.src, userId);
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 
 
@@ -154,49 +199,49 @@ function createUser() {
         <input type="button" value="Create user" id="1_button_'+ elementsCount +'" onclick="createUser()">
     </div>
     <div id="data">
-      <ul name="users_list" id="users" style="width: 650px; list-style-type:none; background-color: slategray; color: azure; ">
+      <ul name="users_list" id="users" style="width:750px; list-style-type:none; background-color: slategray; color: azure; ">
             @{
                 var arrayAwards = @awardLogic.GetAll();
             }
             @foreach (var user in @array)
             {
-                <li id="item_@user.Id" style="border:solid 1px black;" >
-                    <img src="@imagesLogic.GetById(user.ImageId)" alt="user icon" width="40"/>
-                    Name(@user.Name): <input type="text" value="" id="nameusr_@user.Id" size="5" />
-                    Date of birth @String.Format("{0:M/d/yyyy}", @user.DateOfBirth): <input type="date" value="" id="dobusr_@user.Id" size="6" />
-                    Age: @user.Age
-                    @if (User.IsInRole("admins") && user.Name != "admin")
-                    {
-                    <input type="button" value="Update" id="updbtnusr_@user.Id" onclick="updateUser(@user.Id)" />
-                    <input type="button" value="Delete" id="delbtnusr_@user.Id" onclick="removeUser(@user.Id)" />
-
-                    <select id="selaward_@user.Id">
-                        @foreach (var award in @arrayAwards)
-                        {
-                            <option value="@award.Id">@award.Title</option>
-                        }
-                    </select>
-                    <input type="button" value="AddAward" id="addawdbtn_@user.Id" onclick="addAwardToUser(@user.Id)" />
-                    }
-                    <br />
-                    @if (User.IsInRole("users"))
-                    {
-                        var awards = awardedUsersLogic.GetAwardsByUserId(@user.Id, awardLogic.GetAll());
-                        @:Awards
-                    <ul style="background-color: cornflowerblue;">
-                        @foreach (var award in awards)
-                        {
-                            <li id="item_@award.Id">
-                                @award
-                                @if (User.IsInRole("admins") && user.Name != "admin")
-                                {
-                                <input type="button" value="Delete" id="delawdbtnusr_@user.Id"
-                                       onclick="removeAwardFromUser(@user.Id, @award.Id)"/>
-                                }
-                            </li>
-                        }
-                    </ul>}
-                </li>
+          <li id="item_@user.Id" style="border:solid 1px black;">
+              <img src="@imagesLogic.GetById(user.ImageId)" alt="user icon" width="40" height="40" id="icon_@user.Id"/>
+              Name(@user.Name): <input type="text" value="" id="nameusr_@user.Id" size="5" />
+              Date of birth @String.Format("{0:M/d/yyyy}", @user.DateOfBirth): <input type="date" value="Date()" id="dobusr_@user.Id" size="6" />
+              Age: @user.Age
+              @if (User.IsInRole("admins") && user.Name != "admin")
+              {
+                  <input type="button" value="Update" id="updbtnusr_@user.Id" onclick="updateUser(@user.Id)" />
+                  <input type="button" value="Delete" id="delbtnusr_@user.Id" onclick="removeUser(@user.Id)" />
+                  <input type="file" onchange="updateIcon(@user.Id)" value="Update icon" title="Update icon" id="file_@user.Id">
+                  <select id="selaward_@user.Id">
+                      @foreach (var award in @arrayAwards)
+                      {
+                          <option value="@award.Id">@award.Title</option>
+                      }
+                  </select>
+                  <input type="button" value="AddAward" id="addawdbtn_@user.Id" onclick="addAwardToUser(@user.Id)" />
+              }
+              <br />
+              @if (User.IsInRole("users"))
+              {
+                  var awards = awardedUsersLogic.GetAwardsByUserId(@user.Id, awardLogic.GetAll());
+                  @:Awards
+                  <ul style="background-color: cornflowerblue;">
+                      @foreach (var award in awards)
+                      {
+                          <li id="item_@award.Id">
+                              @award
+                              @if (User.IsInRole("admins") && user.Name != "admin")
+                              {
+                                  <input type="button" value="Delete" id="delawdbtnusr_@user.Id"
+                                         onclick="removeAwardFromUser(@user.Id, @award.Id)" />
+                              }
+                          </li>
+                      }
+                  </ul>}
+          </li>
              }
         </ul>
     </div>

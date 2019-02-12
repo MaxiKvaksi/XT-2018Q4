@@ -9,7 +9,7 @@ namespace Epam.Task7.DAL.Interface
 {
     public interface IImageDao
     {
-        void Add(Image image);
+        int Add(Image image);
 
         void Delete(int id);
 
